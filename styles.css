@@ -39,3 +39,32 @@ h2 {
     background-color: #ccc;
     cursor: not-allowed;
 }
+#jugarNivel{
+    position: relative;
+    width: 100vw;
+    height: 90vh;
+    border: 2px solid red;
+    border-radius: 5px;
+}
+#botonResultado,#resultadoInput{
+    position: absolute;
+    font-weight: 600;
+    font-size: 20px;
+    border-radius: 5px;
+    background-color: #4caf50;
+    border: 5px solid #215822;
+}
+#botonResultado{
+    top:16vh;
+    left: calc(50vw + 60px);
+    width: 100px;
+    height: 40px;   
+    }
+
+#resultadoInput{
+    top: 10vh;
+    left: calc(50vw - 150px);
+    width: 300px;
+    height: 40px;
+    text-align: center;   
+}
