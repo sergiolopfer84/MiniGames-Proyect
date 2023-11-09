@@ -68,3 +68,10 @@ h2 {
     height: 40px;
     text-align: center;   
 }
+.bola {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%; /* Para hacer círculos */
+    background-color: red; /* Color de las bolas */
+    position: absolute;
+}

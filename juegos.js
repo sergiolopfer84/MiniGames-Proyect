@@ -62,6 +62,11 @@ function crearNuevaPantalla(number) {
             resultadoInput1.id = "resultadoInput";            
             jugarNivel.appendChild(resultadoInput1);
             jugarNivel.appendChild(botonResultado);
+            botonResultado.addEventListener("click", function () {
+                jugarNivel.innerHTML = "";
+                crearBolas(jugarNivel);
+            })
+            
             break;
         case 2:
             // Lógica para el nivel 2, si es diferente al nivel 1
@@ -82,4 +87,50 @@ function crearNuevaPantalla(number) {
 
     document.querySelector(".container").appendChild(jugarNivel);
 }
+function crearBolas(container) {
+    for (let i = 0; i < 10; i++) {
+        const bola = document.createElement('div');
+        bola.classList.add('bola');
+        bola.id = `bola-${i + 1}`; // Asignar un ID único a cada bola
+        container.appendChild(bola);
+        moverBola(bola, container); // Pasar el contenedor a la función moverBola
+    }
+}
 
+function moverBola(bola, container) {
+    const containerWidth = container.offsetWidth;
+    const containerHeight = container.offsetHeight;
+    const bolaSize = 20; // Tamaño de la bola (píxeles)
+
+    let posX = Math.random() * (containerWidth - bolaSize);
+    let posY = Math.random() * (containerHeight - bolaSize);
+    let targetX = Math.random() * (containerWidth - bolaSize);
+    let targetY = Math.random() * (containerHeight - bolaSize);
+
+    const speed = 1; // Velocidad del movimiento
+
+    function move() {
+        if (posX < targetX) {
+            posX = Math.min(posX + speed, containerWidth - bolaSize);
+        } else {
+            posX = Math.max(posX - speed, 0);
+        }
+        if (posY < targetY) {
+            posY = Math.min(posY + speed, containerHeight - bolaSize);
+        } else {
+            posY = Math.max(posY - speed, 0);
+        }
+
+        bola.style.left = posX + 'px';
+        bola.style.top = posY + 'px';
+
+        if (Math.abs(posX - targetX) < speed && Math.abs(posY - targetY) < speed) {
+            targetX = Math.random() * (containerWidth - bolaSize);
+            targetY = Math.random() * (containerHeight - bolaSize);
+        }
+
+        requestAnimationFrame(move);
+    }
+
+    move();
+}
