@@ -53,8 +53,7 @@ function crearNuevaPantalla(number) {
     jugarNivel.id = "jugarNivel";
     const botonResultado = document.createElement('button');
     botonResultado.id = "botonResultado";
-    botonResultado.textContent = "Jugar";
-   
+    botonResultado.textContent = "Jugar";   
 
     switch (number) {
         case 1:
