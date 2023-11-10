@@ -64,7 +64,7 @@ function crearNuevaPantalla(number) {
             jugarNivel.appendChild(botonResultado);
             botonResultado.addEventListener("click", function () {
                 jugarNivel.innerHTML = "";
-                crearBolas(jugarNivel);
+                crearBolas(resultadoInput1, jugarNivel);
             })
             
             break;
@@ -87,12 +87,21 @@ function crearNuevaPantalla(number) {
 
     document.querySelector(".container").appendChild(jugarNivel);
 }
-function crearBolas(container) {
-    for (let i = 0; i < 10; i++) {
+function crearBolas(resultadoInput, container) {
+    const numeroFinal = parseInt(resultadoInput.value);
+    for (let i = 0; i < 5; i++) {
         const bola = document.createElement('div');
+        const bolaComplement = document.createElement('div');
         bola.classList.add('bola');
+        bolaComplement.classList.add('bola');
         bola.id = `bola-${i + 1}`; // Asignar un ID único a cada bola
-        container.appendChild(bola);
+        bolaComplement.id = `bola-${i + 6}`;
+        const numeroAleatorio = Math.floor(Math.random() *(numeroFinal - 1));
+        bola.textContent = numeroAleatorio;
+        bolaComplement.textContent= numeroFinal - numeroAleatorio;
+                container.appendChild(bola);
+        container.appendChild(bolaComplement);
+        moverBola(bolaComplement, container);
         moverBola(bola, container); // Pasar el contenedor a la función moverBola
     }
 }
@@ -100,7 +109,7 @@ function crearBolas(container) {
 function moverBola(bola, container) {
     const containerWidth = container.offsetWidth;
     const containerHeight = container.offsetHeight;
-    const bolaSize = 20; // Tamaño de la bola (píxeles)
+    const bolaSize = 160; // Tamaño de la bola (píxeles)
 
     let posX = Math.random() * (containerWidth - bolaSize);
     let posY = Math.random() * (containerHeight - bolaSize);
