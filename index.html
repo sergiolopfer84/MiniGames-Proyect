@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minijuegos</title>
     <link rel="stylesheet" href="styles.css">
     <script src="juegos.js"></script>
-   
+
 </head>
+
 <body>
     <div class="container">
         <div class="game" id="nivel1">
             <h2>Nivel 1</h2>
             <button class="play-button">Jugar Nivel 1</button>
-            
+
         </div>
         <div class="game" id="nivel2">
             <h2>Nivel 2</h2>
@@ -22,7 +24,55 @@
         <div class="game" id="nivel3">
             <h2>Nivel 3</h2>
             <button class="play-button" disabled>Jugar Nivel 3</button>
+            <div id="modal-container" class="modal-container">
+            <div id="game-container">
+                <div class="keys">
+                    <!-- Llaves con números -->
+                    <div class="key" draggable="true" data-value="2">2</div>
+                    <div class="key" draggable="true" data-value="8">8</div>
+                    <div class="key" draggable="true" data-value="21">21</div>
+                    <div class="key" draggable="true" data-value="30">30</div>
+                    <div class="key" draggable="true" data-value="12">12</div>
+                    <div class="key" draggable="true" data-value="27">27</div>
+                    <!-- Agrega más llaves aquí -->
+                </div>
+                <div class="locks">
+                    <!-- Candados con operaciones -->
+                    <div class="lock" data-value="7x3">
+                        <span class="operation">7x3</span>
+                        <span class="status"></span>
+                    </div>
+                    <div class="lock" data-value="4x2">
+                        <span class="operation">4x2</span>
+                        <span class="status"></span>
+                    </div>
+                    <div class="lock" data-value="1x2">
+                        <span class="operation">1x2</span>
+                        <span class="status"></span>
+                    </div>
+                    <div class="lock" data-value="9x3">
+                        <span class="operation">9x3</span>
+                        <span class="status"></span>
+                    </div>
+                    <div class="lock" data-value="4x3">
+                        <span class="operation">4x3</span>
+                        <span class="status"></span>
+                    </div>
+                    <div class="lock" data-value="10x3">
+                        <span class="operation">10x3</span>
+                        <span class="status"></span>
+                    </div>
+
+                    <!-- Agrega más candados aquí -->
+                </div>
+
+            </div>
+            <button class="instrucciones3" disabled>Ayuda
+                <div class="tooltip">Cada llave abre un sólo candado. Arrástralas hacia el candado adecuado y conseguirás abrirlos todos</div>
+            </button>
+            
         </div>
     </div>
 </body>
+
 </html>
