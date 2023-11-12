@@ -88,15 +88,29 @@ h2 {
     
 }
 .globoSeleccionado{
-    width: 180px;
-    height: 250px;
-    font-size: 40px;
-    font-weight: 900;
-    line-height: 100px;
+    width: 150px;
+    height: 290px;
+    font-size: 80px;
+    font-weight: bolder;
+    line-height: 150px;
     border-radius: 50%; /* Para hacer círculos */
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
     position: absolute;
-    border: 3px solid black;
+   
+}
+#scoreDiv{
+    width: 25%;
+    height: 8%;
+    background-color: yellow;
+    border-radius: 80%;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+    line-height: 50px;
+    
 }

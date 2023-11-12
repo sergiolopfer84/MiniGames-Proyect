@@ -1,3 +1,35 @@
+function jugarNivelFuncion(nivel) {
+    // Verifica si el nivel anterior está desbloqueado
+    if (nivel === 1 || (nivel === 2 && nivel1Completado) || (nivel === 3 && nivel2Completado)) {
+        alert(`¡Has completado el Nivel ${nivel}!`);
+        // Desbloquea el siguiente nivel
+        if (nivel === 1) {
+            console.log(`jugarNivelFuncion llamada para Nivel ${nivel}`);
+            document.getElementById('nivel2').querySelector('.play-button').removeAttribute('disabled');
+            nivel1Completado = true;
+
+            document.getElementById('jugarNivel').style.display = 'none';
+
+            // Muestra la pantalla inicial
+            document.getElementById('container').style.display = 'block';
+            const nivel1 = document.getElementById("nivel1");
+            nivel1.style.display = "inline-block";
+            const nivel2 = document.getElementById("nivel2");
+            nivel2.style.display = "inline-block";
+            const nivel3 = document.getElementById("nivel3");
+            nivel3.style.display = "inline-block";
+           
+        } else if (nivel === 2) {
+            console.log(`jugarNivelFuncion llamada para Nivel ${nivel}`);
+            document.getElementById('nivel3').querySelector('.play-button').removeAttribute('disabled');
+            nivel2Completado = true;
+        }
+    } else {
+        console.log(`jugarNivelFuncion llamada para Nivel ${nivel}`);
+        alert(`Debes completar el Nivel ${nivel - 1} antes de desbloquear el Nivel ${nivel}.`);
+    }
+}
+
 
 let nivel1Completado = false;
 let nivel2Completado = false;
@@ -52,6 +84,7 @@ function crearNuevaPantalla(number) {
             const resultadoInput1 = document.createElement("input");
             resultadoInput1.placeholder = "Introduce el resultado del nivel 1";
             resultadoInput1.id = "resultadoInput";
+            
             jugarNivel.appendChild(resultadoInput1);
             jugarNivel.appendChild(botonResultado);
 
@@ -92,6 +125,11 @@ let globosSeleccionados = [];
 
 // Función para crear las globos
 function crearGlobos(resultadoInput, container) {
+
+    const scoreDiv = document.createElement("div");
+            scoreDiv.id = "scoreDiv";
+            scoreDiv.innerText= `Puntuación: ${score}`;
+            jugarNivel.appendChild(scoreDiv);
     const numeroFinal = parseInt(resultadoInput.value); // Guardamos el valor de la suma
     let arrayGlobos = [];
 
@@ -143,15 +181,15 @@ function crearGlobos(resultadoInput, container) {
                 
                 // Calcular la suma
                 const suma = valorGlobo1 + valorGlobo2;
-                console.log(suma + " " + valorGlobo1 + " " + valorGlobo2);
+                
                 // Obtener el resultado esperado del input
                 const resultadoEsperado = parseInt(resultadoInput.value);
-                console.log(globosSeleccionados[1].className);
+               
                 // Comparar la suma con el resultado esperado
                 if (suma === resultadoEsperado) {
-                    alert('¡Correcto!');
+                   
                     score += 1;
-                    console.log(score);
+                    document.getElementById("scoreDiv").innerText = `Puntuación: ${score}`;
                     arrayGlobos.forEach(element => {
                         if(element.className == "globoSeleccionado"){
                             element.remove();
@@ -159,6 +197,13 @@ function crearGlobos(resultadoInput, container) {
                     });
                     if (score === 5){
                         nivel1Completado = true; 
+                        jugarNivelFuncion(1);
+
+                        // Ocultar el contenedor del nivel actual
+                        container.style.display = 'none';
+                
+                        // Mostrar la pantalla inicial (el contenedor)
+                        document.querySelector('.container').style.display = 'block';
                     }
                 } else {
                     alert('¡Incorrecto! Inténtalo de nuevo.');
