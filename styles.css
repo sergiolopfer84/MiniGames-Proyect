@@ -1,4 +1,4 @@
-body {
+body{
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     text-align: center;
@@ -51,7 +51,7 @@ h2 {
     background-repeat: no-repeat;
     background-size: cover;
 }
-#botonResultado,#resultadoInput{
+#botonResultado,#resultadoInput, #resultadoInput3{
     position: absolute;
     font-weight: 600;
     font-size: 20px;
@@ -59,6 +59,114 @@ h2 {
     background-color: #4caf50;
     border: 5px solid #215822;
 }
+
+.instrucciones3 {
+    background-color: rgb(240, 244, 244);
+    cursor: url('/img/interrogacion.png'),auto;
+    color: #000000;
+    font-size: larger;
+    font-weight: bolder;
+    padding: 8px 16px;
+    position: relative; /* Esto es necesario para el posicionamiento absoluto del tooltip */
+    float: left;
+  }
+  
+  .tooltip {
+    visibility: hidden;
+    width: 500px;
+    background-color: rgb(83, 134, 8);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    font-size: 24px;
+    
+    /* Posicionamiento */
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: 80px; /* Centrar el tooltip */
+    /* Estilos para la animación */
+    opacity: 0;
+    transition: opacity 2s;
+  }
+  
+  .instrucciones3:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+    cursor: url('/img/interrogacion.png');
+  }
+.keys, .locks{
+    display: flex;
+    flex-wrap: wrap;
+    width: 45%;
+    height: max-content;
+}
+
+#jugarNivel3 {
+
+    display: flex;
+    justify-content: space-around;
+    background-image:url('/img/Fondo.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  .key, .lock {
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .lock {
+    border-color: red;
+    background-image: url('/img/candadoCerrado.png');
+    background-size: contain; /* Ajusta la imagen completa dentro del elemento */
+    background-position: center;
+    background-repeat: no-repeat; /* Asegúrate de que la imagen no se repita */
+    /* Asegúrate de que el tamaño del .key sea suficiente para mostrar la imagen entera */
+    width: 80px; /* o el tamaño que necesites */
+    height: 80px; /* o el tamaño que necesites */
+    /* Otros estilos */
+    margin-top: 45px;
+  }
+  .key {
+    background-image: url('/img/llave.png');
+    background-size: contain; /* Ajusta la imagen completa dentro del elemento */
+    background-position: center;
+    background-repeat: no-repeat; /* Asegúrate de que la imagen no se repita */
+    /* Asegúrate de que el tamaño del .key sea suficiente para mostrar la imagen entera */
+    width: 100px; /* o el tamaño que necesites */
+    height: 120px; /* o el tamaño que necesites */
+    /* Otros estilos */
+    justify-content: center;
+    align-items: center;
+    font-weight: bolder;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 22px;
+  }
+  .key:hover{
+    transform: scale(1.5);
+    border-color: solid greenyellow;
+  }
+  
+  .lock .operation {
+    display: block;
+  }
+  
+  .lock .status {
+    color: green;
+  }
+  .operation{
+    align-items: center;
+    margin-top: 55%;
+    font-weight: bolder;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 22px;
+  }
+
 #botonResultado{
     top:16vh;
     left: calc(50vw + 60px);

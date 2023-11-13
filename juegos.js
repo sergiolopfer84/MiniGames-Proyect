@@ -1,18 +1,17 @@
-<<<<<<< HEAD
+
 import { crearGlobos, moverGlobo } from './sumarNati.js';
 export { jugarNivelFuncion };
-=======
+import { operativaCandados } from './candadosSergio.js';
+
 //Adaptar el tamaño del input de resultado
 //Regular centrado de pantalla de juego
-//Regular espacio entre input y botoón de juego
-//En Firefox el alert aparece centrado
-//Nivel dos desbloqueado inicialmente. Corregir
+//Regular espacio entre input y botón de juego
 
 
 
->>>>>>> 536f8f7c2a7a1acc7c279aba6b76438f13eb23bc
 function jugarNivelFuncion(nivel) {
     // Verifica si el nivel anterior está desbloqueado
+    
     if (nivel === 1 || (nivel === 2 && nivel1Completado) || (nivel === 3 && nivel2Completado)) {
         alert(`¡Has completado el Nivel ${nivel}!`);
         // Desbloquea el siguiente nivel
@@ -36,6 +35,14 @@ function jugarNivelFuncion(nivel) {
             console.log(`jugarNivelFuncion llamada para Nivel ${nivel}`);
             document.getElementById('nivel3').querySelector('.play-button').removeAttribute('disabled');
             nivel2Completado = true;
+            document.getElementById('container').style.display = 'block';
+            const nivel1 = document.getElementById("nivel1");
+            nivel1.style.display = "inline-block";
+            const nivel2 = document.getElementById("nivel2");
+            nivel2.style.display = "inline-block";
+            const nivel3 = document.getElementById("nivel3");
+            nivel3.style.display = "inline-block";
+
         }
     } else {
         console.log(`jugarNivelFuncion llamada para Nivel ${nivel}`);
@@ -52,7 +59,7 @@ let nivel1Activo = false;
 
 document.addEventListener('DOMContentLoaded', function () {
     // Iniciamos con los niveles sin completar y la puntuación a cero.
-
+    document.getElementById('nivel3').querySelector('.play-button').removeAttribute('disabled');
 
     // Llamamos a los botones
     const playButton1 = document.getElementById("play-button1");
@@ -86,6 +93,7 @@ function crearNuevaPantalla(number) {
     // Creamos un nuevo div para almacenar y un botón para manejarlo
     const divJugarNivel = document.createElement('div');
     divJugarNivel.id = `jugarNivel${number}`;
+    divJugarNivel.className ="jugarNivel";
 
     const botonResultado = document.createElement('button');
     botonResultado.id = "botonResultado";
@@ -102,6 +110,7 @@ function crearNuevaPantalla(number) {
             resultadoInput1.placeholder = "1-999";
             resultadoInput1.id = "resultadoInput";
             // Comprobamos si el valor introducido es un número válido
+            
             divJugarNivel.appendChild(resultadoInput1);
             divJugarNivel.appendChild(botonResultado);
             resultadoInput1.addEventListener("input", function () {
@@ -133,10 +142,21 @@ function crearNuevaPantalla(number) {
         case 3:
             // Lógica para el nivel 3
             const resultadoInput3 = document.createElement("input");
-            resultadoInput3.id = "resultadoInput";
-            resultadoInput3.placeholder = "Tabla del 1, 2, 3... o todas";
+            resultadoInput3.id = `resultadoInput3`;
+            resultadoInput3.placeholder = "Tabla del 1, 2, 3...";
+           
             divJugarNivel.appendChild(resultadoInput3);
             divJugarNivel.appendChild(botonResultado);
+            // Operativa al pulsar el botón
+                botonResultado.addEventListener("click", function () {
+                    // Eliminamos el input y el botón de la pantalla
+                    divJugarNivel.innerHTML = "";
+                    // Iniciamos el juego pasando por parámetro el valor que queremos 
+                    // como resultado y el input donde se realiza la operativa del juego
+                    operativaCandados(resultadoInput3, divJugarNivel);
+                });
+            
+           
             break;
 
         default:
