@@ -1,3 +1,11 @@
+//Adaptar el tamaño del input de resultado
+//Regular centrado de pantalla de juego
+//Regular espacio entre input y botoón de juego
+//En Firefox el alert aparece centrado
+//Nivel dos desbloqueado inicialmente. Corregir
+
+
+
 function jugarNivelFuncion(nivel) {
     // Verifica si el nivel anterior está desbloqueado
     if (nivel === 1 || (nivel === 2 && nivel1Completado) || (nivel === 3 && nivel2Completado)) {
