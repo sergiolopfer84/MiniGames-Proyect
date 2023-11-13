@@ -1,5 +1,16 @@
+<<<<<<< HEAD
 import { crearGlobos, moverGlobo } from './sumarNati.js';
 export { jugarNivelFuncion };
+=======
+//Adaptar el tamaño del input de resultado
+//Regular centrado de pantalla de juego
+//Regular espacio entre input y botoón de juego
+//En Firefox el alert aparece centrado
+//Nivel dos desbloqueado inicialmente. Corregir
+
+
+
+>>>>>>> 536f8f7c2a7a1acc7c279aba6b76438f13eb23bc
 function jugarNivelFuncion(nivel) {
     // Verifica si el nivel anterior está desbloqueado
     if (nivel === 1 || (nivel === 2 && nivel1Completado) || (nivel === 3 && nivel2Completado)) {
