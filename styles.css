@@ -40,7 +40,7 @@ h2 {
     background-color: #ccc;
     cursor: not-allowed;
 }
-#jugarNivel{
+#jugarNivel1, #jugarNivel2, #jugarNivel3{
     position: relative;
     width: 90vw;
     height: 90vh;
