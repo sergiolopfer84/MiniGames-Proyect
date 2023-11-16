@@ -167,5 +167,3 @@ function crearNuevaPantalla(number) {
     // Añadimos el div de juego al div contenedor.
     document.querySelector(".container").appendChild(divJugarNivel);
 }
-
-
