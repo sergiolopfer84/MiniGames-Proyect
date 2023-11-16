@@ -1,4 +1,4 @@
-body {
+body{
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     text-align: center;
@@ -8,6 +8,7 @@ body {
     display: flex;
     justify-content: space-between;
     margin: 20px;
+    
 }
 
 .game {
@@ -34,9 +35,34 @@ h2 {
     cursor: pointer;
     margin-top: 10px;
 }
+
+.play-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+#jugarNivel1, #jugarNivel2, #jugarNivel3{
+    position: relative;
+    width: 90vw;
+    height: 90vh;
+    border: 2px solid red;
+    border-radius: 5px;
+    background-image: url(/img/cielo_fondo.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#botonResultado,#resultadoInput, #resultadoInput3{
+    position: absolute;
+    font-weight: 600;
+    font-size: 20px;
+    border-radius: 5px;
+    background-color: #4caf50;
+    border: 5px solid #215822;
+}
+
 .instrucciones3 {
     background-color: rgb(240, 244, 244);
-    cursor: url('imgSergio/interrogacion.png'),auto;
+    cursor: url('/img/interrogacion.png'),auto;
     color: #000000;
     font-size: larger;
     font-weight: bolder;
@@ -69,17 +95,20 @@ h2 {
   .instrucciones3:hover .tooltip {
     visibility: visible;
     opacity: 1;
-    cursor: url('imgSergio/interrogacion.png');
+    cursor: url('/img/interrogacion.png');
   }
-
-.play-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+.keys, .locks{
+    display: flex;
+    flex-wrap: wrap;
+    width: 45%;
+    height: max-content;
 }
-#game-container {
+
+#jugarNivel3 {
+
     display: flex;
     justify-content: space-around;
-    background-image:url('imgSergio/Fondo.png');
+    background-image:url('/img/Fondo.png');
     background-repeat: no-repeat;
     background-size: cover;
   }
@@ -93,7 +122,7 @@ h2 {
   
   .lock {
     border-color: red;
-    background-image: url('imgSergio/candadoCerrado.png');
+    background-image: url('/img/candadoCerrado.png');
     background-size: contain; /* Ajusta la imagen completa dentro del elemento */
     background-position: center;
     background-repeat: no-repeat; /* Asegúrate de que la imagen no se repita */
@@ -104,7 +133,7 @@ h2 {
     margin-top: 45px;
   }
   .key {
-    background-image: url('imgSergio/llave.png');
+    background-image: url('/img/llave.png');
     background-size: contain; /* Ajusta la imagen completa dentro del elemento */
     background-position: center;
     background-repeat: no-repeat; /* Asegúrate de que la imagen no se repita */
@@ -138,4 +167,61 @@ h2 {
     font-size: 22px;
   }
 
-  
+#botonResultado{
+    top:16vh;
+    left: calc(50vw + 60px);
+    width: 100px;
+    height: 40px;   
+    }
+
+#resultadoInput{
+    top: 10vh;
+    left: calc(50vw - 150px);
+    width: 300px;
+    height: 40px;
+    text-align: center;   
+}
+.globo {
+    width: 120px;
+    height: 200px;
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 100px;
+    border-radius: 50%; /* Para hacer círculos */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+   
+    
+}
+.globoSeleccionado{
+    width: 150px;
+    height: 290px;
+    font-size: 80px;
+    font-weight: bolder;
+    line-height: 150px;
+    border-radius: 50%; /* Para hacer círculos */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+   
+}
+#scoreDiv{
+    width: 25%;
+    height: 8%;
+    background-color: yellow;
+    border-radius: 80%;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+    line-height: 50px;
+    
+}
+.hidden {
+  display: none;
+}
