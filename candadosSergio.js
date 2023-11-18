@@ -30,13 +30,19 @@ function operativaCandados(resultadoInput3, divJugarNivel) {
         e.preventDefault();
         const draggedValue = parseInt(e.dataTransfer.getData('text/plain'), 10);
         const lockValue = parseInt(this.dataset.value, 10);
-       
-
+        const currentLock = this; // Referencia al candado actual
+    
         if (draggedValue === lockValue) {
-            this.style.backgroundImage = "url('/img/candadoAbierto.png')";
-            console.log(this);
+            currentLock.style.backgroundImage = "url('/img/candadoAbierto.png')";
             hideKey(draggedValue);
             checkAllKeysUsed();
+        }
+        else {
+            currentLock.style.backgroundImage = "url('/img/candadoTriste.png')";
+            // Establecer un temporizador para cambiar la imagen de fondo después de 3 segundos
+            setTimeout(function() {
+                currentLock.style.backgroundImage = "url('/img/candadoCerrado.png')";
+            }, 3000); // 3000 milisegundos equivalen a 2 segundos
         }
     }
 
