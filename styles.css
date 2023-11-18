@@ -58,6 +58,19 @@ h2 {
   border-radius: 5px;
   background-color: #4caf50;
   border: 5px solid #215822;
+ 
+}
+#resultadoInput3{
+  left: calc(40vw +60px );
+  top: 360px;
+}
+#botonResultado {
+  left: calc(40vw +60px );
+  margin: 10px;
+  width: 100px;
+  height: 40px;   
+  top: 400px;
+  
 }
 
 .instrucciones3 {
@@ -69,6 +82,7 @@ h2 {
   padding: 8px 16px;
   position: relative; /* Esto es necesario para el posicionamiento absoluto del tooltip */
   float: left;
+
 }
 
 .tooltip {
@@ -102,6 +116,13 @@ h2 {
   flex-wrap: wrap;
   width: 45%;
   height: max-content;
+}
+.ayuda3{
+  position: absolute;
+  top: 20px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #jugarNivel3 {
@@ -167,12 +188,6 @@ h2 {
   font-size: 22px;
 }
 
-#botonResultado{
-  top:16vh;
-  left: calc(50vw + 60px);
-  width: 100px;
-  height: 40px;   
-  }
 
 #resultadoInput{
   top: 10vh;

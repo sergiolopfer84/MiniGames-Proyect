@@ -11,7 +11,7 @@ import { operativaCandados } from './candadosSergio.js';
 
 function jugarNivelFuncion(nivel) {
     // Verifica si el nivel anterior está desbloqueado
-    
+
     if (nivel === 1 || (nivel === 2 && nivel1Completado) || (nivel === 3 && nivel2Completado)) {
         alert(`¡Has completado el Nivel ${nivel}!`);
         // Desbloquea el siguiente nivel
@@ -93,7 +93,7 @@ function crearNuevaPantalla(number) {
     // Creamos un nuevo div para almacenar y un botón para manejarlo
     const divJugarNivel = document.createElement('div');
     divJugarNivel.id = `jugarNivel${number}`;
-    divJugarNivel.className ="jugarNivel";
+    divJugarNivel.className = "jugarNivel";
 
     const botonResultado = document.createElement('button');
     botonResultado.id = "botonResultado";
@@ -110,7 +110,7 @@ function crearNuevaPantalla(number) {
             resultadoInput1.placeholder = "1-999";
             resultadoInput1.id = "resultadoInput";
             // Comprobamos si el valor introducido es un número válido
-            
+
             divJugarNivel.appendChild(resultadoInput1);
             divJugarNivel.appendChild(botonResultado);
             resultadoInput1.addEventListener("input", function () {
@@ -144,19 +144,47 @@ function crearNuevaPantalla(number) {
             const resultadoInput3 = document.createElement("input");
             resultadoInput3.id = `resultadoInput3`;
             resultadoInput3.placeholder = "Tabla del 1, 2, 3...";
-           
+            const ayuda = document.createElement("div");
+            ayuda.className = "ayuda3";
+            ayuda.style.backgroundImage = "url('/img/profesora.png')";
+            ayuda.style.width = "250px";
+            ayuda.style.height = "250px";
             divJugarNivel.appendChild(resultadoInput3);
+            divJugarNivel.appendChild(ayuda); // Añade la capa ayuda3 al divJugarNivel
             divJugarNivel.appendChild(botonResultado);
-            // Operativa al pulsar el botón
-                botonResultado.addEventListener("click", function () {
-                    // Eliminamos el input y el botón de la pantalla
-                    divJugarNivel.innerHTML = "";
-                    // Iniciamos el juego pasando por parámetro el valor que queremos 
-                    // como resultado y el input donde se realiza la operativa del juego
-                    operativaCandados(resultadoInput3, divJugarNivel);
-                });
-            
-           
+            const mensajeEmergente = document.createElement('div');
+            mensajeEmergente.id = 'mensajeEmergente';
+            mensajeEmergente.textContent = 'Hola, este juego te ayudará a practicar las tablas de multiplicar. Arrastra las llaves al candado con la solución correspondiente para abrirlos todos, si el candado se pone triste podrás seguir intentándolo. ¡Mucha suerte y que te diviertas!';
+            mensajeEmergente.style.position = 'absolute';
+            mensajeEmergente.style.display = 'none';
+            mensajeEmergente.style.zIndex = '1000'; // Asegúrate de que esté por encima de otros elementos
+            // Agregar más estilos para centrarlo en pantalla, darle color, etc.
+
+            // Agregar el mensaje emergente al cuerpo del documento o al contenedor relevante
+            document.body.appendChild(mensajeEmergente);
+
+            // Agregar el evento al hacer clic en ayuda3
+            ayuda.addEventListener('click', function () {
+                // Posicionar el mensaje emergente y mostrarlo
+                mensajeEmergente.style.left = '50%';
+                mensajeEmergente.style.top = '50%';
+                mensajeEmergente.style.transform = 'translate(-50%, -50%)';
+                mensajeEmergente.style.display = 'block';
+            });
+
+            // Opcional: escuchar clics fuera del mensaje para cerrarlo
+            document.addEventListener('click', function (event) {
+                if (event.target !== ayuda && event.target !== mensajeEmergente) {
+                    mensajeEmergente.style.display = 'none';
+                
+                }
+            });
+            botonResultado.addEventListener("click", function () {
+                divJugarNivel.innerHTML = ""; // Esto elimina todo el contenido, incluida la capa ayuda3
+                operativaCandados(resultadoInput3, divJugarNivel);
+            });
+
+
             break;
 
         default:
@@ -167,3 +195,4 @@ function crearNuevaPantalla(number) {
     // Añadimos el div de juego al div contenedor.
     document.querySelector(".container").appendChild(divJugarNivel);
 }
+
