@@ -17,6 +17,7 @@ body {
   border: 2px solid #333;
   border-radius: 5px;
   width: 30%;
+  
 }
 
 h2 {
@@ -55,55 +56,36 @@ h2 {
   background-size: cover;
 }
 
-#botonResultado,
 #resultadoInput,
 #resultadoInput3 {
   position: absolute;
   font-weight: 600;
   font-size: 20px;
   border-radius: 5px;
-  background-color: #4caf50;
-  border: 5px solid #215822;
-}
+  background-color:rgb(255, 255, 252);
+  border: 5px solid rgba(18, 19, 18, 0.741);
 
-.instrucciones3 {
-  background-color: rgb(240, 244, 244);
-  cursor: url('/img/interrogacion.png'), auto;
-  color: #000000;
-  font-size: larger;
-  font-weight: bolder;
-  padding: 8px 16px;
+}
+#botonResultado{
   position: relative;
-  /* Esto es necesario para el posicionamiento absoluto del tooltip */
-  float: left;
-}
+  margin-right: 1830px;
+  font-weight: 600;
+  font-size: 20px;
+  border-radius: 5px;
+  background-color:rgb(255, 255, 252);
+  border: 5px solid rgba(18, 19, 18, 0.741);
+  cursor: pointer;
+  }
 
-.tooltip {
-  visibility: hidden;
-  width: 500px;
-  background-color: rgb(83, 134, 8);
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-  font-size: 24px;
-
-  /* Posicionamiento */
-  position: absolute;
-  z-index: 1;
-  bottom: 100%;
-  left: 50%;
-  margin-left: 80px;
-  /* Centrar el tooltip */
-  /* Estilos para la animación */
-  opacity: 0;
-  transition: opacity 2s;
-}
-
-.instrucciones3:hover .tooltip {
-  visibility: visible;
-  opacity: 1;
-  cursor: url('/img/interrogacion.png');
+#botonResultado:hover{
+background-color: #4caf50;
+color: white;
+position: relative;
+font-weight: 600;
+font-size: 20px;
+border-radius: 5px;
+border: 5px solid rgba(13, 240, 28, 0.741);
+cursor: pointer;
 }
 
 .keys,
@@ -218,6 +200,7 @@ h2 {
   width: 300px;
   height: 40px;
   text-align: center;
+
 }
 
 .globo {
@@ -269,23 +252,39 @@ h2 {
 .hidden {
   display: none;
 }
+@keyframes entradaDesdeAtras {
+  0% {
+    transform: translateZ(-500px) rotateY(0deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translateZ(0px) rotateY(360deg);
+    opacity: 1;
+  }
+}
 
 .ayuda3 {
+  animation-name: entradaDesdeAtras;
+  animation-duration: 2000ms;
+  animation-timing-function: ease-out; /* This will make the animation start fast and slow down towards the end. */
+  animation-fill-mode: forwards;
   justify-content: center;
+  position: absolute;
   background-image: url('/img/profesor.png');
-  margin-top: 500px;
-  transform: scale(2);
+  margin-top: 400px;
   background-size: cover;
+  /* Define el punto de fuga para la perspectiva */
+  perspective: 1000px;
+  /* Set the perspective origin to ensure the rotation happens in the desired axis */
+  perspective-origin: center;
+  /* Set the transform-style to preserve the 3D aspect of the transformations */
+  transform-style: preserve-3d;
 }
-
-.ayuda3:hover {
-  transform: scale(2.5);
-  justify-content: center;
-  background-image: url('/img/profesor.png');
-  margin-top: 500px;
-  background-size: cover;
+.ayuda3:hover{
   cursor: pointer;
 }
+
+
 @keyframes entradaSuave {
   from {
     opacity: 0;

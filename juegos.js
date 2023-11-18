@@ -146,9 +146,9 @@ function crearNuevaPantalla(number) {
             resultadoInput3.placeholder = "Tabla del 1, 2, 3...";
             const ayuda = document.createElement("div");
             ayuda.className = "ayuda3";
-            ayuda.style.backgroundImage = "url('/img/profesor.png')";
-            ayuda.style.width = "100px";
-            ayuda.style.height = "100px";
+            ayuda.style.backgroundImage = "url('/img/profesora.png')";
+            ayuda.style.width = "250px";
+            ayuda.style.height = "250px";
             divJugarNivel.appendChild(resultadoInput3);
             divJugarNivel.appendChild(ayuda); // Añade la capa ayuda3 al divJugarNivel
             divJugarNivel.appendChild(botonResultado);
