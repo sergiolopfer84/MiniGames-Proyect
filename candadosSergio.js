@@ -48,7 +48,7 @@ function operativaCandados(resultadoInput3, divJugarNivel) {
 
     function hideKey(value) {
         const keyElement = document.querySelector(`.key[data-value="${value}"]`);
-        console.log(keyElement);
+       
         if (keyElement) {
             keyElement.style.display = 'none';
             hidenKeys= hidenKeys-1;

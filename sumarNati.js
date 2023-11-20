@@ -6,24 +6,25 @@ let score = 0;
 
 
 // Función para crear las globos
-function crearGlobos(resultadoInput, divJugarNivel) {
-  
-        const scoreDiv = document.createElement("div");
-        scoreDiv.id = "scoreDiv";
-        scoreDiv.innerText = `Puntuación: ${score}`;
-        divJugarNivel.appendChild(scoreDiv);
-        const numeroFinal = parseInt(resultadoInput.value); // Guardamos el valor de la suma
-        let arrayGlobos = [];
+function crearGlobos(resultadoInput, divJugarNivel, operacion) {
 
-        // Iteramos para crear los globos y sus complementos
-        for (let i = 0; i < 5; i++) {
-            const globo = document.createElement('div');
-            const globoComplement = document.createElement('div');
-            globo.className = 'globo';
-            globoComplement.className = 'globo';
-            globo.id = `globo-${i + 1}`; // Asignar un ID único a cada globo
-            globoComplement.id = `globoComplem-${i + 1}`;
+    const scoreDiv = document.createElement("div");
+    scoreDiv.id = "scoreDiv";
+    scoreDiv.innerText = `Puntuación: ${score}`;
+    divJugarNivel.appendChild(scoreDiv);
+    const numeroFinal = parseInt(resultadoInput.value); // Guardamos el valor de la suma
+    let arrayGlobos = [];
 
+    // Iteramos para crear los globos y sus complementos
+    for (let i = 0; i < 5; i++) {
+        const globo = document.createElement('div');
+        const globoComplement = document.createElement('div');
+        globo.className = 'globo';
+        globoComplement.className = 'globo';
+        globo.id = `globo-${i + 1}`; // Asignar un ID único a cada globo
+        globoComplement.id = `globoComplem-${i + 1}`;
+        
+        if (operacion === "+") {
             // Generamos un número aleatorio entre 0 y el resultado deseado en 5 de los globos
             const numeroAleatorio = Math.floor(Math.random() * (numeroFinal - 1));
             // Le ponemos ese valor texto a los cinco globos
@@ -31,45 +32,56 @@ function crearGlobos(resultadoInput, divJugarNivel) {
             // El valor complementario en los otros cinco
             globoComplement.textContent = numeroFinal - numeroAleatorio;
 
-            // Introducimos dos variables para dar fondo aleatorio a los globos
-            const randomGloboNumber1 = Math.floor(Math.random() * 6) + 1;
-            const randomGloboNumber2 = Math.floor(Math.random() * 6) + 1;
-            globo.style.backgroundImage = `url('img/globo${randomGloboNumber1}.png')`;
-            globoComplement.style.backgroundImage = `url('img/globo${randomGloboNumber2}.png')`;
+        } else {
+            const numeroAleatorio = Math.floor(Math.random() * (numeroFinal - 1));
+            globo.textContent = numeroAleatorio;
+            globoComplement.textContent = numeroFinal + numeroAleatorio;
 
-            // Agregamos los globos al array
-            arrayGlobos.push(globo, globoComplement);
         }
 
-        // Añadimos los globos al contenedor
-        container.append(...arrayGlobos);
 
-        // Ejecutamos la función para mover los globos
-        arrayGlobos.forEach(globo => {
-            moverGlobo(globo, container);
-            //!Aki la lógica de las sumas y de parar el movimiento
-            globo.addEventListener("click", () => {
-                // Agregar el globo seleccionado al array
-                globosSeleccionados.push(globo);
-                globosSeleccionados.forEach(element => {
-                    element.className = "globoSeleccionado";
-                });
+        // Introducimos dos variables para dar fondo aleatorio a los globos
+        const randomGloboNumber1 = Math.floor(Math.random() * 6) + 1;
+        const randomGloboNumber2 = Math.floor(Math.random() * 6) + 1;
+        globo.style.backgroundImage = `url('img/globo${randomGloboNumber1}.png')`;
+        globoComplement.style.backgroundImage = `url('img/globo${randomGloboNumber2}.png')`;
 
-                if (globosSeleccionados.length === 2) {
+        // Agregamos los globos al array
+        arrayGlobos.push(globo, globoComplement);
+    }
 
-                    // Obtener los valores de los globos seleccionados
-                    const valorGlobo1 = parseInt(globosSeleccionados[0].textContent);
-                    const valorGlobo2 = parseInt(globosSeleccionados[1].textContent);
+    // Añadimos los globos al contenedor
+    container.append(...arrayGlobos);
 
+    // Ejecutamos la función para mover los globos
+    arrayGlobos.forEach(globo => {
+        moverGlobo(globo, container);
+      
+        //!Aki la lógica de las sumas, restas y de parar el movimiento
+        globo.addEventListener("click", () => {
+            // Agregar el globo seleccionado al array
+           
+            globosSeleccionados.push(globo);
+          
+            globosSeleccionados.forEach(element => {              
+                element.className = "globoSeleccionado";
+            });
+            
+                    // Obtener el resultado esperado del input
+                    const resultadoEsperado = parseInt(resultadoInput.value);
+            console.log("Estamos aquí "+ globosSeleccionados.length);
+            if (globosSeleccionados.length === 2) {
+                console.log("Estamos aquí "+ globosSeleccionados.length);
+                // Obtener los valores de los globos seleccionados
+                const valorGlobo1 = parseInt(globosSeleccionados[0].textContent);
+                const valorGlobo2 = parseInt(globosSeleccionados[1].textContent);
+                console.log(valorGlobo1 + " " +valorGlobo2);
+                if (operacion === "+") {
                     // Calcular la suma
                     const suma = valorGlobo1 + valorGlobo2;
 
-                    // Obtener el resultado esperado del input
-                    const resultadoEsperado = parseInt(resultadoInput.value);
-
                     // Comparar la suma con el resultado esperado
                     if (suma === resultadoEsperado) {
-
                         score += 1;
                         document.getElementById("scoreDiv").innerText = `Puntuación: ${score}`;
                         arrayGlobos.forEach(element => {
@@ -77,31 +89,84 @@ function crearGlobos(resultadoInput, divJugarNivel) {
                                 element.remove();
                             }
                         });
-                        if (score === 5) {
-                            window.nivel1Completado = true;
-                            jugarNivelFuncion(1);
-
-                            // Ocultar el contenedor del nivel actual
-                            container.style.display = 'none';
-
-                            // Mostrar la pantalla inicial (el contenedor)
-                            document.querySelector('.container').style.display = 'block';
-                        }
+                        
                     } else {
                         alert('¡Incorrecto! Inténtalo de nuevo.');
                         globosSeleccionados[0].className = "globo";
                         globosSeleccionados[1].className = "globo";
+
                     }
 
-                    // Limpiar el array de globos seleccionados
-                    globosSeleccionados = [];
+                } else {
+                    // Calcular la resta
+                    if (valorGlobo1 > valorGlobo2) {
+                        const resta = valorGlobo1 - valorGlobo2;
+
+                        // Comparar la suma con el resultado esperado
+                        if (resta === resultadoEsperado) {
+                            score += 1;
+                            document.getElementById("scoreDiv").innerText = `Puntuación: ${score}`;
+                            arrayGlobos.forEach(element => {
+                                if (element.className == "globoSeleccionado") {
+                                    element.remove();
+                                }
+                            });
+                        } else {
+                            alert('¡Incorrecto! Inténtalo de nuevo.');
+                            globosSeleccionados[0].className = "globo";
+                            globosSeleccionados[1].className = "globo";
+
+
+                        }
+                    } if (valorGlobo1 < valorGlobo2) {                       
+                    
+                        const resta = valorGlobo2 - valorGlobo1;
+                        // Comparar la suma con el resultado esperado
+                        if (resta === resultadoEsperado) {
+                            score += 1;
+                            document.getElementById("scoreDiv").innerText = `Puntuación: ${score}`;
+                            arrayGlobos.forEach(element => {
+                                if (element.className == "globoSeleccionado") {
+                                    element.remove();
+                                }
+                            });
+                        } else {
+                            alert('¡Incorrecto! Inténtalo de nuevo.');
+                            globosSeleccionados[0].className = "globo";
+                            globosSeleccionados[1].className = "globo";
+
+
+                        }
+
+
+                    }
                 }
+                // Limpiar el array de globos seleccionados
+              globosSeleccionados = []; 
+            }   
+              
+                if (score === 5) {
+                    window.nivel1Completado = true;
+                    jugarNivelFuncion(1);
 
-            })
+                    // Ocultar el contenedor del nivel actual
+                    container.style.display = 'none';
+
+                    // Mostrar la pantalla inicial (el contenedor)
+                    document.querySelector('.container').style.display = 'block';
+                }
+            
 
 
-        });
-    }
+        })
+
+
+          
+
+
+
+    });
+}
 
 
 // Función para mover los globos.

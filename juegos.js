@@ -13,7 +13,7 @@ function jugarNivelFuncion(nivel) {
     // Verifica si el nivel anterior está desbloqueado
 
     if (nivel === 1 || (nivel === 2 && nivel1Completado) || (nivel === 3 && nivel2Completado)) {
-        alert(`¡Has completado el Nivel ${nivel}!`);
+
         // Desbloquea el siguiente nivel
         if (nivel === 1) {
             console.log(`jugarNivelFuncion llamada para Nivel ${nivel}`);
@@ -110,7 +110,32 @@ function crearNuevaPantalla(number) {
             resultadoInput1.placeholder = "1-999";
             resultadoInput1.id = "resultadoInput";
             // Comprobamos si el valor introducido es un número válido
+            const ayuda1 = document.createElement("div");
+            ayuda1.className = "ayuda1";
+            ayuda1.style.backgroundImage = "url('/img/profesor.png')";
+            ayuda1.style.width = "250px";
+            ayuda1.style.height = "250px";
 
+            //Se crea el selector para las operaciones 
+            const operacion = document.createElement("select");
+            operacion.className = "operacion";
+            operacion.id = "operacion";
+
+            const option1 = document.createElement("option");
+            option1.value = "+";
+            option1.text = "Suma";
+            option1.id = "option1";
+
+            const option2 = document.createElement("option");
+            option2.value = "-";
+            option2.text = "Resta";
+            option2.id = "option2";
+
+            operacion.appendChild(option1);
+            operacion.appendChild(option2);
+
+            divJugarNivel.appendChild(operacion);
+            divJugarNivel.appendChild(ayuda1);
             divJugarNivel.appendChild(resultadoInput1);
             divJugarNivel.appendChild(botonResultado);
             resultadoInput1.addEventListener("input", function () {
@@ -127,9 +152,10 @@ function crearNuevaPantalla(number) {
                 botonResultado.addEventListener("click", function () {
                     // Eliminamos el input y el botón de la pantalla
                     divJugarNivel.innerHTML = "";
+                    const valorOperacion = operacion.value;
                     // Iniciamos el juego pasando por parámetro el valor que queremos 
                     // como resultado y el input donde se realiza la operativa del juego
-                    crearGlobos(resultadoInput1, divJugarNivel);
+                    crearGlobos(resultadoInput1, divJugarNivel, valorOperacion);
                 });
             }
             break;
@@ -176,7 +202,7 @@ function crearNuevaPantalla(number) {
             document.addEventListener('click', function (event) {
                 if (event.target !== ayuda && event.target !== mensajeEmergente) {
                     mensajeEmergente.style.display = 'none';
-                
+
                 }
             });
             botonResultado.addEventListener("click", function () {

@@ -42,7 +42,7 @@ h2 {
 }
 #jugarNivel1, #jugarNivel2, #jugarNivel3{
   position: relative;
-  width: 90vw;
+  width: 99vw;
   height: 90vh;
   border: 2px solid red;
   border-radius: 5px;
@@ -51,26 +51,36 @@ h2 {
   background-repeat: no-repeat;
   background-size: cover;
 }
-#botonResultado,#resultadoInput, #resultadoInput3{
+#jugarNivel3 {
+  display: flex;
+  justify-content: space-around;
+  background-image:url('/img/Fondo.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#botonResultado,#resultadoInput, #resultadoInput3, .operacion{
   position: absolute;
   font-weight: 600;
   font-size: 20px;
   border-radius: 5px;
   background-color: #4caf50;
   border: 5px solid #215822;
- 
+  cursor: pointer; 
 }
-#resultadoInput3{
-  left: calc(40vw +60px );
+#resultadoInput3, #resultadoInput {
+  left: calc(46vw + 30px );
   top: 360px;
 }
+.operacion{
+  top: 360px;
+  left: calc(48vw + 120px);
+}
 #botonResultado {
-  left: calc(40vw +60px );
+  left: calc(45vw + 90px );
   margin: 10px;
   width: 100px;
   height: 40px;   
-  top: 400px;
-  
+  top: 430px;  
 }
 
 .instrucciones3 {
@@ -82,7 +92,11 @@ h2 {
   padding: 8px 16px;
   position: relative; /* Esto es necesario para el posicionamiento absoluto del tooltip */
   float: left;
-
+}
+.instrucciones3:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+  cursor: url('/img/interrogacion.png');
 }
 
 .tooltip {
@@ -93,8 +107,7 @@ h2 {
   text-align: center;
   border-radius: 6px;
   padding: 5px 0;
-  font-size: 24px;
-  
+  font-size: 24px;  
   /* Posicionamiento */
   position: absolute;
   z-index: 1;
@@ -105,42 +118,34 @@ h2 {
   opacity: 0;
   transition: opacity 2s;
 }
-
-.instrucciones3:hover .tooltip {
-  visibility: visible;
-  opacity: 1;
-  cursor: url('/img/interrogacion.png');
-}
 .keys, .locks{
   display: flex;
   flex-wrap: wrap;
   width: 45%;
   height: max-content;
 }
-.ayuda3{
-  position: absolute;
-  top: 20px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-#jugarNivel3 {
-
-  display: flex;
-  justify-content: space-around;
-  background-image:url('/img/Fondo.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
 .key, .lock {
   margin: 10px;
   padding: 10px;
   text-align: center;
   cursor: pointer;
 }
-
+.ayuda3{
+  
+  position: absolute;
+  top: 20px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.ayuda1{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:contain;
+  position: absolute;
+  right: calc(50vw - 250px);
+  top: 20px;
+}
 .lock {
   border-color: red;
   background-image: url('/img/candadoCerrado.png');
@@ -186,15 +191,6 @@ h2 {
   font-weight: bolder;
   font-family: 'Courier New', Courier, monospace;
   font-size: 22px;
-}
-
-
-#resultadoInput{
-  top: 10vh;
-  left: calc(50vw - 150px);
-  width: 300px;
-  height: 40px;
-  text-align: center;   
 }
 .globo {
   width: 120px;
