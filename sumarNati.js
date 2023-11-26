@@ -23,9 +23,9 @@ function crearGlobos(resultadoInput, divJugarNivel, operacion) {
         globoComplement.className = 'globo';
         globo.id = `globo-${i + 1}`; // Asignar un ID único a cada globo
         globoComplement.id = `globoComplem-${i + 1}`;
-        
+
         if (operacion === "+") {
-            // Generamos un número aleatorio entre 0 y el resultado deseado en 5 de los globos
+           
             const numeroAleatorio = Math.floor(Math.random() * (numeroFinal - 1));
             // Le ponemos ese valor texto a los cinco globos
             globo.textContent = numeroAleatorio;
@@ -56,26 +56,26 @@ function crearGlobos(resultadoInput, divJugarNivel, operacion) {
     // Ejecutamos la función para mover los globos
     arrayGlobos.forEach(globo => {
         moverGlobo(globo, container);
-      
+
         //!Aki la lógica de las sumas, restas y de parar el movimiento
         globo.addEventListener("click", () => {
             // Agregar el globo seleccionado al array
-           
+
             globosSeleccionados.push(globo);
-          
-            globosSeleccionados.forEach(element => {              
+
+            globosSeleccionados.forEach(element => {
                 element.className = "globoSeleccionado";
             });
-            
-                    // Obtener el resultado esperado del input
-                    const resultadoEsperado = parseInt(resultadoInput.value);
-            console.log("Estamos aquí "+ globosSeleccionados.length);
+
+            // Obtener el resultado esperado del input
+            const resultadoEsperado = parseInt(resultadoInput.value);
+            console.log("Estamos aquí " + globosSeleccionados.length);
             if (globosSeleccionados.length === 2) {
-                console.log("Estamos aquí "+ globosSeleccionados.length);
+                console.log("Estamos aquí " + globosSeleccionados.length);
                 // Obtener los valores de los globos seleccionados
                 const valorGlobo1 = parseInt(globosSeleccionados[0].textContent);
                 const valorGlobo2 = parseInt(globosSeleccionados[1].textContent);
-                console.log(valorGlobo1 + " " +valorGlobo2);
+                console.log(valorGlobo1 + " " + valorGlobo2);
                 if (operacion === "+") {
                     // Calcular la suma
                     const suma = valorGlobo1 + valorGlobo2;
@@ -89,7 +89,7 @@ function crearGlobos(resultadoInput, divJugarNivel, operacion) {
                                 element.remove();
                             }
                         });
-                        
+
                     } else {
                         alert('¡Incorrecto! Inténtalo de nuevo.');
                         globosSeleccionados[0].className = "globo";
@@ -118,8 +118,8 @@ function crearGlobos(resultadoInput, divJugarNivel, operacion) {
 
 
                         }
-                    } if (valorGlobo1 < valorGlobo2) {                       
-                    
+                    } if (valorGlobo1 < valorGlobo2) {
+
                         const resta = valorGlobo2 - valorGlobo1;
                         // Comparar la suma con el resultado esperado
                         if (resta === resultadoEsperado) {
@@ -142,28 +142,23 @@ function crearGlobos(resultadoInput, divJugarNivel, operacion) {
                     }
                 }
                 // Limpiar el array de globos seleccionados
-              globosSeleccionados = []; 
-            }   
-              
-                if (score === 5) {
-                    window.nivel1Completado = true;
-                    jugarNivelFuncion(1);
+                globosSeleccionados = [];
+            }
 
-                    // Ocultar el contenedor del nivel actual
-                    container.style.display = 'none';
+            if (score === 5) {
+                window.nivel1Completado = true;
+                jugarNivelFuncion(1);
 
-                    // Mostrar la pantalla inicial (el contenedor)
-                    document.querySelector('.container').style.display = 'block';
-                }
-            
+                // Ocultar el contenedor del nivel actual
+                container.style.display = 'none';
+
+                // Mostrar la pantalla inicial (el contenedor)
+                document.querySelector('.container').style.display = 'block';
+            }
+
 
 
         })
-
-
-          
-
-
 
     });
 }
