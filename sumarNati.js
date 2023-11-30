@@ -60,24 +60,26 @@ function crearGlobos(resultadoInput, divJugarNivel, operacion) {
         //!Aki la lógica de las sumas, restas y de parar el movimiento
         globo.addEventListener("click", () => {
             // Agregar el globo seleccionado al array
-
-            globosSeleccionados.push(globo);
-
+            if (globosSeleccionados.length === 0){
+                globosSeleccionados.push(globo);
+            }
+            if (globosSeleccionados.length ===1 && globosSeleccionados[0].id !== globo.id){
+                globosSeleccionados.push(globo);
+            }
             globosSeleccionados.forEach(element => {
                 element.className = "globoSeleccionado";
-            });
+            });            
 
             // Obtener el resultado esperado del input
-            const resultadoEsperado = parseInt(resultadoInput.value);
-            console.log("Estamos aquí " + globosSeleccionados.length);
-            if (globosSeleccionados.length === 2) {
-                console.log("Estamos aquí " + globosSeleccionados.length);
+            const resultadoEsperado = parseInt(resultadoInput.value);           
+            if (globosSeleccionados.length === 2) {               
                 // Obtener los valores de los globos seleccionados
                 const valorGlobo1 = parseInt(globosSeleccionados[0].textContent);
                 const valorGlobo2 = parseInt(globosSeleccionados[1].textContent);
-                console.log(valorGlobo1 + " " + valorGlobo2);
+             
                 if (operacion === "+") {
-                    // Calcular la suma
+                    // Calcular la suma                   
+                    
                     const suma = valorGlobo1 + valorGlobo2;
 
                     // Comparar la suma con el resultado esperado
@@ -86,7 +88,25 @@ function crearGlobos(resultadoInput, divJugarNivel, operacion) {
                         document.getElementById("scoreDiv").innerText = `Puntuación: ${score}`;
                         arrayGlobos.forEach(element => {
                             if (element.className == "globoSeleccionado") {
-                                element.remove();
+                                gsap.to(`#${element.id}`, {
+                                    duration: 0.2,
+                                    scale: 2,
+                                    ease: "power1.in",
+                                    onComplete: explode
+                                  });
+                                  
+                                  function explode() {
+                                    gsap.to(`#${element.id}`, {
+                                      duration: 0.4,
+                                      opacity: 0,
+                                      scale: 0,
+                                      ease: "sine.out",
+                                      onComplete: () =>{
+                                       element.style.display = "none";
+                                       element.remove();}
+                                    });
+                                  }
+                                
                             }
                         });
 
@@ -118,7 +138,7 @@ function crearGlobos(resultadoInput, divJugarNivel, operacion) {
 
 
                         }
-                    } if (valorGlobo1 < valorGlobo2) {
+                    } if (valorGlobo1 <= valorGlobo2) {
 
                         const resta = valorGlobo2 - valorGlobo1;
                         // Comparar la suma con el resultado esperado

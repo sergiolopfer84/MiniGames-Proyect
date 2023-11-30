@@ -60,7 +60,7 @@ let nivel1Activo = false;
 document.addEventListener('DOMContentLoaded', function () {
     // Iniciamos con los niveles sin completar y la puntuación a cero.
     document.getElementById('nivel3').querySelector('.play-button').removeAttribute('disabled');
-
+    document.getElementById('nivel2').querySelector('.play-button').removeAttribute('disabled');
     // Llamamos a los botones
     const playButton1 = document.getElementById("play-button1");
     const playButton2 = document.getElementById("play-button2");
