@@ -1,7 +1,16 @@
-
 import { crearGlobos, moverGlobo } from './sumarNati.js';
 export { jugarNivelFuncion };
 import { operativaCandados } from './candadosSergio.js';
+import { startGame } from './juegoYeTati.js';
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    var musica = document.getElementById("musicaJuegos");
+    musica.play().catch(error => {
+        console.log("La reproducción automática fue bloqueada por el navegador.");
+    });
+});
+
+
 
 //Adaptar el tamaño del input de resultado
 //Regular centrado de pantalla de juego
@@ -138,6 +147,34 @@ function crearNuevaPantalla(number) {
             divJugarNivel.appendChild(ayuda1);
             divJugarNivel.appendChild(resultadoInput1);
             divJugarNivel.appendChild(botonResultado);
+            const mensajeEmergente1 = document.createElement('div');
+            mensajeEmergente1.id = 'mensajeEmergente1';
+            mensajeEmergente1.style.padding = '5px';
+            mensajeEmergente1.textContent = 'Selecciona un resultado y pulsa jugar para realizar la suma o resta según corresponda. Pincha un globo y luego su pareja, si aciertas explotarán, ¡Mucha Suerte!';
+            mensajeEmergente1.style.position = 'absolute';
+            mensajeEmergente1.style.marginTop = '50px';
+            mensajeEmergente1.style.display = 'none';
+            mensajeEmergente1.style.zIndex = '1000';
+            mensajeEmergente1.style.backgroundColor = 'black';
+            mensajeEmergente1.style.color = 'white';
+            mensajeEmergente1.style.borderRadius = '50px';
+            document.body.appendChild(mensajeEmergente1);
+            ayuda1.addEventListener('click', function () {
+                mensajeEmergente1.style.left = '55%';
+                mensajeEmergente1.style.top = '30%';
+                mensajeEmergente1.style.transform = 'translate(-50%, -50%)';
+                mensajeEmergente1.style.display = 'block';
+            });
+    
+            // Opcional: escuchar clics fuera del mensaje para cerrarlo
+            document.addEventListener('click', function (event) {
+                if (event.target !== ayuda1 && event.target !== mensajeEmergente1) {
+                    mensajeEmergente1.style.display = 'none';
+                }
+            })
+
+
+
             resultadoInput1.addEventListener("input", function () {
                 const maxValue = 999;
                 if (parseInt(resultadoInput1.value) > maxValue) {
@@ -161,8 +198,53 @@ function crearNuevaPantalla(number) {
             break;
 
         case 2:
-            // Lógica para el nivel 2
+            
+            // Input para introducir los datos y botón para iniciar el juego
+            const resultadoInput2 = document.createElement("input");
+            resultadoInput2.type = "number";
+            resultadoInput2.min = 10;
+            resultadoInput2.max = 100;
+            resultadoInput2.placeholder = "10-100";
+            resultadoInput2.id = "resultadoInput2";
+            // Comprobamos si el valor introducido es un número válido
+            
+
+            divJugarNivel.appendChild(resultadoInput2);
             divJugarNivel.appendChild(botonResultado);
+            resultadoInput2.style.margin = "auto";
+            botonResultado.style.margin = "auto";
+            botonResultado.style.marginTop = "70px";
+            
+            resultadoInput2.addEventListener("input", function () {
+                const maxValue = 100;
+                const minValue = 10;
+                if (parseInt(resultadoInput2.value) > maxValue) {
+                    resultadoInput2.value = maxValue; // Si es mayor a 100, ajustamos el valor
+                }
+                if(parseInt(resultadoInput2.value) < minValue){
+                    resultadoInput2.value = minValue;
+                }
+            });
+
+            if (isNaN(resultadoInput2.value)) {
+                alert("El valor introducido no es un número válido.");
+            } else {
+                // Operativa al pulsar el botón
+                
+                botonResultado.addEventListener("click", function () {
+                    // Eliminamos el input y el botón de la pantalla
+                    divJugarNivel.innerHTML = "";
+                    
+                    const container = document.querySelector(".container");
+                        divJugarNivel.style.width = container.offsetWidth + "px";
+                        divJugarNivel.style.height = container.offsetHeight + "px";
+                        
+                    // Iniciamos el juego pasando por parámetro el valor que queremos 
+                    // como resultado y el input donde se realiza la operativa del juego
+                    startGame(resultadoInput2, divJugarNivel);
+                });
+            }
+           
             break;
 
         case 3:
@@ -182,8 +264,12 @@ function crearNuevaPantalla(number) {
             mensajeEmergente.id = 'mensajeEmergente';
             mensajeEmergente.textContent = 'Hola, este juego te ayudará a practicar las tablas de multiplicar. Arrastra las llaves al candado con la solución correspondiente para abrirlos todos, si el candado se pone triste podrás seguir intentándolo. ¡Mucha suerte y que te diviertas!';
             mensajeEmergente.style.position = 'absolute';
+            mensajeEmergente.style.marginTop = '50px';
             mensajeEmergente.style.display = 'none';
-            mensajeEmergente.style.zIndex = '1000'; // Asegúrate de que esté por encima de otros elementos
+            mensajeEmergente.style.zIndex = '1000';
+            mensajeEmergente.style.backgroundColor = 'black'; // Asegúrate de que esté por encima de otros elementos
+            mensajeEmergente.style.color = 'white';
+            mensajeEmergente.style.borderRadius = '50px';
             // Agregar más estilos para centrarlo en pantalla, darle color, etc.
 
             // Agregar el mensaje emergente al cuerpo del documento o al contenedor relevante
@@ -192,8 +278,8 @@ function crearNuevaPantalla(number) {
             // Agregar el evento al hacer clic en ayuda3
             ayuda.addEventListener('click', function () {
                 // Posicionar el mensaje emergente y mostrarlo
-                mensajeEmergente.style.left = '50%';
-                mensajeEmergente.style.top = '50%';
+                mensajeEmergente.style.left = '55%';
+                mensajeEmergente.style.top = '28%';
                 mensajeEmergente.style.transform = 'translate(-50%, -50%)';
                 mensajeEmergente.style.display = 'block';
             });

@@ -4,7 +4,12 @@ import { jugarNivelFuncion } from "./juegos.js";
 let globosSeleccionados = [];
 let score = 0;
 
-
+document.addEventListener('DOMContentLoaded', (event) => {
+    var musica = document.getElementById("musicaJuegos");
+    musica.play().catch(error => {
+        console.log("La reproducción automática fue bloqueada por el navegador.");
+    });
+});
 // Función para crear las globos
 function crearGlobos(resultadoInput, divJugarNivel, operacion) {
 
@@ -88,25 +93,8 @@ function crearGlobos(resultadoInput, divJugarNivel, operacion) {
                         document.getElementById("scoreDiv").innerText = `Puntuación: ${score}`;
                         arrayGlobos.forEach(element => {
                             if (element.className == "globoSeleccionado") {
-                                gsap.to(`#${element.id}`, {
-                                    duration: 0.2,
-                                    scale: 2,
-                                    ease: "power1.in",
-                                    onComplete: explode
-                                  });
-                                  
-                                  function explode() {
-                                    gsap.to(`#${element.id}`, {
-                                      duration: 0.4,
-                                      opacity: 0,
-                                      scale: 0,
-                                      ease: "sine.out",
-                                      onComplete: () =>{
-                                       element.style.display = "none";
-                                       element.remove();}
-                                    });
-                                  }
-                                
+                                explode(globosSeleccionados[0]);
+                                explode(globosSeleccionados[1]);
                             }
                         });
 
@@ -128,7 +116,8 @@ function crearGlobos(resultadoInput, divJugarNivel, operacion) {
                             document.getElementById("scoreDiv").innerText = `Puntuación: ${score}`;
                             arrayGlobos.forEach(element => {
                                 if (element.className == "globoSeleccionado") {
-                                    element.remove();
+                                    explode(globosSeleccionados[0]);
+                                    explode(globosSeleccionados[1]);
                                 }
                             });
                         } else {
@@ -147,7 +136,8 @@ function crearGlobos(resultadoInput, divJugarNivel, operacion) {
                             document.getElementById("scoreDiv").innerText = `Puntuación: ${score}`;
                             arrayGlobos.forEach(element => {
                                 if (element.className == "globoSeleccionado") {
-                                    element.remove();
+                                    explode(globosSeleccionados[0]);
+                                    explode(globosSeleccionados[1]);
                                 }
                             });
                         } else {
@@ -167,6 +157,7 @@ function crearGlobos(resultadoInput, divJugarNivel, operacion) {
 
             if (score === 5) {
                 window.nivel1Completado = true;
+                
                 jugarNivelFuncion(1);
 
                 // Ocultar el contenedor del nivel actual
@@ -261,4 +252,33 @@ function moverGlobo(globo, divJugarNivel) {
 
     // Agregar un listener para detectar el final de la animación
     globo.addEventListener('animationend', onAnimationEnd);
+}
+function explode(globo) {
+    // Crear fragmentos del globo
+    for (let i = 0; i < 20; i++) {
+        const fragmento = document.createElement('div');
+        fragmento.style.width = '20px';
+        fragmento.style.height = '20px';
+        fragmento.style.position = 'absolute';
+        fragmento.style.backgroundColor = 'white'; // Color visible para los fragmentos
+        fragmento.style.borderRadius = '50%';
+        const rect = globo.getBoundingClientRect();
+        fragmento.style.left = (rect.left + window.scrollX + globo.offsetWidth / 2 - 5) + 'px'; // Centrar en el globo
+        fragmento.style.top = (rect.top + window.scrollY + globo.offsetHeight / 2 - 5) + 'px'; // Centrar en el globo
+
+        document.body.appendChild(fragmento); // Asegurarse de que se añade al body
+
+        // Animar fragmentos
+        gsap.to(fragmento, {
+            x: Math.random() * 200 - 100, // Valores aleatorios para la dirección
+            y: Math.random() * 200 - 100, // Valores aleatorios para la dirección
+            opacity: 0,
+            duration: 1,
+            ease: "power1.out",
+            onComplete: () => fragmento.remove() // Eliminar fragmento después de la animación
+        });
+    }
+
+    // Eliminar el globo original
+    globo.remove();
 }

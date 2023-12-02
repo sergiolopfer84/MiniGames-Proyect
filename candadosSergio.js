@@ -38,7 +38,7 @@ function operativaCandados(resultadoInput3, divJugarNivel) {
             checkAllKeysUsed();
         }
         else {
-            currentLock.style.backgroundImage = "url('/img/candadoTriste1.png')";
+            currentLock.style.backgroundImage = "url('/img/candadoTriste.png')";
             // Establecer un temporizador para cambiar la imagen de fondo después de 3 segundos
             setTimeout(function() {
                 currentLock.style.backgroundImage = "url('/img/candadoCerrado.png')";
@@ -57,9 +57,16 @@ function operativaCandados(resultadoInput3, divJugarNivel) {
     }
 
     function checkAllKeysUsed() {
-        if (hidenKeys=== 0) {
+        if (hidenKeys === 0) {
             const gameContainer = document.getElementById('jugarNivel3');
             gameContainer.innerHTML = `<img src="/img/SUCESS.gif" alt="Imagen de éxito">`;
+            
+            // Establecer un temporizador para cerrar y eliminar el juego después de 5 segundos
+            setTimeout(function() {
+                gameContainer.style.display = 'none'; // Oculta el contenedor del juego
+                window.location.href = 'index.html';
+            }, 5000); // 5000 milisegundos = 5 segundos
+
         }
     }
 }
@@ -68,8 +75,8 @@ function generarNumeros(llave, candado, resultadoInput3, i, resultadosMezclados)
     let numero, numero2, resultado;
 
     if (isNaN(resultadoInput3.value) || resultadoInput3.value === "") {
-        numero = Math.floor(Math.random() * 10) + 1;
-        numero2 = Math.floor(Math.random() * 10) + 1;
+        numero = i;  // Esto generará la tabla del número i
+        numero2 = 0;  // Esto asegura que la multiplicación sea siempre con 0
         resultado = numero * numero2;
     } else {
         numero = i;
@@ -80,11 +87,9 @@ function generarNumeros(llave, candado, resultadoInput3, i, resultadosMezclados)
     llave.textContent = `${numero} x ${numero2}`;
     llave.dataset.value = resultado.toString();
 
-    // Usar un resultado aleatorio de la lista mezclada
     candado.textContent = resultadosMezclados[i - 1];
     candado.dataset.value = resultadosMezclados[i - 1].toString();
 }
-
 function crearCandadosLlaves(resultadoInput3, divJugarNivel) {
     const locks = document.createElement("div");
     locks.className = "locks";
@@ -92,18 +97,22 @@ function crearCandadosLlaves(resultadoInput3, divJugarNivel) {
     keys.className = "keys";
     let resultados = [];
 
-    for (let i = 1; i <= 10; i++) {
-        let numero = i;
-        let numero2 = isNaN(resultadoInput3.value) || resultadoInput3.value === "" ?
-                      Math.floor(Math.random() * 10) + 1 :
-                      parseInt(resultadoInput3.value, 10);
-        resultados.push(numero * numero2);
-    }
-
-    // Barajar los resultados
-    for (let i = resultados.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [resultados[i], resultados[j]] = [resultados[j], resultados[i]];
+    if (isNaN(resultadoInput3.value) || resultadoInput3.value === "") {
+        // Generar resultados como 0 para la tabla del 0
+        resultados = Array(10).fill(0);
+    } else {
+        // Calcular resultados normalmente
+        for (let i = 1; i <= 10; i++) {
+            let numero = i;
+            let numero2 = parseInt(resultadoInput3.value, 10);
+            resultados.push(numero * numero2);
+        }
+        
+        // Barajar los resultados si es necesario
+        for (let i = resultados.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [resultados[i], resultados[j]] = [resultados[j], resultados[i]];
+        }
     }
 
     for (let i = 1; i <= 10; i++) {
@@ -113,7 +122,6 @@ function crearCandadosLlaves(resultadoInput3, divJugarNivel) {
         llave.className = "key";
         llave.draggable = true;
 
-        // Pasar la lista de resultados mezclados a generarNumeros
         generarNumeros(llave, candado, resultadoInput3, i, resultados);
         
         locks.appendChild(candado);
