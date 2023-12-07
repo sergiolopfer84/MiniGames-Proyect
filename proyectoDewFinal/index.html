@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minijuegos</title>
+    <link rel="stylesheet" href="styles.css">
+    <audio id="musicaJuegos" src="img/Calimba - E's Jammy Jams.mp3"></audio>
+</head>
+<body>
+
+    <button id="toggleMusic">Musica</button>
+
+    <script>
+        var musica = document.getElementById("musicaJuegos");
+        var botonMusica = document.getElementById('toggleMusic');
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            musica.play().catch(error => {
+                console.log("La reproducción automática fue bloqueada por el navegador.");
+            });
+            actualizarIcono(); // Actualizar el icono al cargar
+        });
+
+        function actualizarIcono() {
+            if (musica.paused) {
+                botonMusica.innerHTML = '<img src="img/musicaOff.png" alt="Música Pausada" style="width: 49px;"/>'; // Ajusta el tamaño aquí
+            } else {
+                botonMusica.innerHTML = '<img src="img/musicaOn.png" alt="Reproduciendo Música" style="width: 50px;"/>'; // Ajusta el tamaño aquí
+            }
+        }
+        botonMusica.addEventListener('click', function() {
+            if (musica.paused) {
+                musica.play();
+            } else {
+                musica.pause();
+            }
+            actualizarIcono(); // Actualizar el icono en cada clic
+        });
+    </script>
+    <div class="container" id="container">
+        <div class="game" id="nivel1">
+           
+            <button class="play-button" id="play-button1">Jugar Nivel 1</button>            
+        </div>
+        <div class="game" id="nivel2">
+            
+            <button class="play-button" id="play-button2" disabled>Jugar Nivel 2</button>
+        </div>
+        <div class="game" id="nivel3">
+            <div class="miniCandados">
+               
+                <button class="play-button" id="play-button3" disabled>Jugar Nivel 3</button>
+            </div>
+           
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script type="module" src="juegos.js"></script>
+</body>
+</html>
