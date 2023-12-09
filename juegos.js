@@ -12,12 +12,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 
 
-//Adaptar el tamaño del input de resultado
-//Regular centrado de pantalla de juego
-//Regular espacio entre input y botón de juego
-
-
-
 function jugarNivelFuncion(nivel) {
     // Verifica si el nivel anterior está desbloqueado
 
@@ -68,8 +62,7 @@ let nivel1Activo = false;
 
 document.addEventListener('DOMContentLoaded', function () {
     // Iniciamos con los niveles sin completar y la puntuación a cero.
-    document.getElementById('nivel3').querySelector('.play-button').removeAttribute('disabled');
-    document.getElementById('nivel2').querySelector('.play-button').removeAttribute('disabled');
+  
     // Llamamos a los botones
     const playButton1 = document.getElementById("play-button1");
     const playButton2 = document.getElementById("play-button2");
@@ -177,43 +170,95 @@ function crearNuevaPantalla(number) {
 
             resultadoInput1.addEventListener("input", function () {
                 const maxValue = 999;
+                const minValue = 1;
                 if (parseInt(resultadoInput1.value) > maxValue) {
                     resultadoInput1.value = maxValue; // Si es mayor a 999, ajustamos el valor
                 }
+                if (parseInt(resultadoInput1.value) < minValue) {
+                    resultadoInput1.value = minValue;
+                }
             });
 
-            if (isNaN(resultadoInput1.value)) {
-                alert("El valor introducido no es un número válido.");
-            } else {
+            
                 // Operativa al pulsar el botón
                 botonResultado.addEventListener("click", function () {
-                    // Eliminamos el input y el botón de la pantalla
-                    divJugarNivel.innerHTML = "";
-                    const valorOperacion = operacion.value;
-                    // Iniciamos el juego pasando por parámetro el valor que queremos 
-                    // como resultado y el input donde se realiza la operativa del juego
-                    crearGlobos(resultadoInput1, divJugarNivel, valorOperacion);
+                    // Convertimos el valor del input a un número
+                    const valorInput = parseInt(resultadoInput1.value);
+                
+                    // Verificamos si el valor del input es un número válido
+                    if (isNaN(valorInput)) {
+                        // Mostrar un mensaje de error si el valor no es un número
+                        alert("El valor introducido no es un número válido.");
+                    } else {
+                        // Continuar con la lógica del juego si el valor es un número válido
+                
+                        // Limpiar el divJugarNivel y establecer el fondo
+                        divJugarNivel.innerHTML = "";
+                        divJugarNivel.style.backgroundImage = "url('/img/cielo_fondo.png')";
+                
+                        // Obtener el valor de la operación seleccionada
+                        const valorOperacion = operacion.value;
+                
+                        // Iniciar el juego
+                        crearGlobos(resultadoInput1, divJugarNivel, valorOperacion);
+                    }
                 });
-            }
+            
             break;
 
         case 2:
             
-            // Input para introducir los datos y botón para iniciar el juego
+            // Input para introducir los datos y botón para iniciar el jueg
             const resultadoInput2 = document.createElement("input");
+        
             resultadoInput2.type = "number";
             resultadoInput2.min = 10;
             resultadoInput2.max = 100;
             resultadoInput2.placeholder = "10-100";
             resultadoInput2.id = "resultadoInput2";
             // Comprobamos si el valor introducido es un número válido
-            
+            const ayuda2 = document.createElement("div");
+            ayuda2.className = "ayuda2";
+            ayuda2.style.backgroundImage = "url('/img/profesora.png')";
+            ayuda2.style.width = "250px";
+            ayuda2.style.height = "250px";
+            divJugarNivel.appendChild(ayuda2);
+            const mensajeEmergente2 = document.createElement('div');
+            mensajeEmergente2.id = 'mensajeEmergente2';
+            mensajeEmergente2.textContent = 'Hola, este juego te ayudará a distinguir que números son mayores y menores. Selecciona de mayor a menor los pececitos hasta ordenarlos todos, ¡mucha suerte!';
+            mensajeEmergente2.style.position = 'absolute';
+            mensajeEmergente2.style.marginTop = '50px';
+            mensajeEmergente2.style.display = 'none';
+            mensajeEmergente2.style.zIndex = '1000';
+            mensajeEmergente2.style.backgroundColor = 'black'; // Asegúrate de que esté por encima de otros elementos
+            mensajeEmergente2.style.color = 'white';
+            mensajeEmergente2.style.borderRadius = '50px';
+            // Agregar más estilos para centrarlo en pantalla, darle color, etc.
 
+            // Agregar el mensaje emergente al cuerpo del documento o al contenedor relevante
+            document.body.appendChild(mensajeEmergente2);
+            ayuda2.addEventListener('click', function () {
+                // Posicionar el mensaje emergente y mostrarlo
+                mensajeEmergente2.style.left = '55%';
+                mensajeEmergente2.style.top = '28%';
+                mensajeEmergente2.style.transform = 'translate(-50%, -50%)';
+                mensajeEmergente2.style.display = 'block';
+            });
+
+            // Opcional: escuchar clics fuera del mensaje para cerrarlo
+            document.addEventListener('click', function (event) {
+                if (event.target !== ayuda2 && event.target !== mensajeEmergente2) {
+                    mensajeEmergente2.style.display = 'none';
+
+                }
+            });
+            const botonResultado2 = document.createElement('button');
+            botonResultado2.id = "botonResultado2";
+            botonResultado2.textContent = "Jugar";
             divJugarNivel.appendChild(resultadoInput2);
-            divJugarNivel.appendChild(botonResultado);
+            divJugarNivel.appendChild(botonResultado2);
             resultadoInput2.style.margin = "auto";
-            botonResultado.style.margin = "auto";
-            botonResultado.style.marginTop = "70px";
+            
             
             resultadoInput2.addEventListener("input", function () {
                 const maxValue = 100;
@@ -231,10 +276,10 @@ function crearNuevaPantalla(number) {
             } else {
                 // Operativa al pulsar el botón
                 
-                botonResultado.addEventListener("click", function () {
+                botonResultado2.addEventListener("click", function () {
                     // Eliminamos el input y el botón de la pantalla
                     divJugarNivel.innerHTML = "";
-                    
+                    divJugarNivel.style.backgroundImage = "url('/img/fondo2.jpg')";
                     const container = document.querySelector(".container");
                         divJugarNivel.style.width = container.offsetWidth + "px";
                         divJugarNivel.style.height = container.offsetHeight + "px";

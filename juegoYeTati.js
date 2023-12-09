@@ -4,7 +4,10 @@ import { jugarNivelFuncion } from "./juegos.js";
 const numberImages = [];
 const numImagesToGenerate = 10;
 const numTotalPeces = 100;
-
+const element = document.createElement('div');
+const parrafo = document.createElement('p');
+element.className = 'orderedNumbers';
+parrafo.className = 'orderedNumbers p';
 for (let i = 0; i < numTotalPeces; i++) {
   const img = new Image();
   const imageIndex = i % numImagesToGenerate; // Usamos el operador módulo para ciclar entre las 10 imágenes
@@ -12,32 +15,6 @@ for (let i = 0; i < numTotalPeces; i++) {
   img.id = `peces_${i}`;
   numberImages.push(img);
 }
-
-
-// Función para mostrar la pantalla de instrucciones al cargar la página
-/*window.onload = function() {
-  showInstructionsModal();
-};
-
-function showInstructionsModal() {
-  var modal = document.getElementById('instructionsModal');
-  modal.style.display = 'flex'; // Cambia 'none' a 'flex' para mostrar la superposición
-}
-
-function closeInstructionsModal() {
-  var modal = document.getElementById('instructionsModal');
-  modal.style.display = 'none';
-}
-function showCongratulationsScreen() {
-  var congratulationsScreen = document.getElementById('congratulationsScreen');
-  congratulationsScreen.style.display = 'block';
-}
-
-function hideCongratulationsScreen() {
-  var congratulationsScreen = document.getElementById('congratulationsScreen');
-  congratulationsScreen.style.display = 'none';
-}
-*/
 
 function generateRandomNumbers(valor) {
   let numbers = [];
@@ -78,7 +55,20 @@ function startGame(resultadoInput2, divJugarNivel) {
       
 
       if (randomNumbers.length === 0) {
-        //showCongratulationsScreen();
+        
+          const gameContainer2 = document.getElementById('jugarNivel2');
+          gameContainer2.innerHTML = `<img src="/img/SUCCESS2.png" alt="Imagen de éxito" style="width: 100%; height: 100%; object-fit: cover;">`;
+          const display2 = document.querySelector('.orderedNumbers');
+          //display2.style.display = `none`;
+          
+          // Establecer un temporizador para cerrar y eliminar el juego después de 5 segundos
+          setTimeout(function() {
+              gameContainer2.style.display = 'none'; // Oculta el contenedor del juego
+              //window.location.href = 'index.html';
+              window.nivel2Completado = true;
+              jugarNivelFuncion(2);
+          }, 5000); // 5000 milisegundos
+          
         
       }
 
@@ -130,9 +120,6 @@ function displayNumbers(container, numbers, divJugarNivel) {
         displayNumbers(sorted, sortedNumbers, divJugarNivel);
         console.log(randomNumbers);
 
-        if (numbers.length === 0) {
-          showCongratulationsScreen();
-        }
       } 
       
     });
@@ -140,10 +127,7 @@ function displayNumbers(container, numbers, divJugarNivel) {
   divJugarNivel.appendChild(container);
 }
 
-const element = document.createElement('div');
-const parrafo = document.createElement('p');
-element.className = 'orderedNumbers';
-parrafo.className = 'orderedNumbers p';
+
 
 function displayOrderedNumber(number, divJugarNivel) {
 

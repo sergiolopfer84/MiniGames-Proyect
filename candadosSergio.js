@@ -5,7 +5,7 @@ export { operativaCandados, crearCandadosLlaves, generarNumeros };
 import { jugarNivelFuncion } from "./juegos.js";
 function operativaCandados(resultadoInput3, divJugarNivel) {
     crearCandadosLlaves(resultadoInput3, divJugarNivel);
-    console.log("hola");
+    
     const keys = document.querySelectorAll('.key');
     const locks = document.querySelectorAll('.lock');
 
@@ -59,7 +59,7 @@ function operativaCandados(resultadoInput3, divJugarNivel) {
     function checkAllKeysUsed() {
         if (hidenKeys === 0) {
             const gameContainer = document.getElementById('jugarNivel3');
-            gameContainer.innerHTML = `<img src="/img/SUCESS.gif" alt="Imagen de éxito">`;
+            gameContainer.innerHTML = `<img src="/img/SUCESS.gif" alt="Imagen de éxito" style="width: 100%; height: 100%; object-fit: cover;">`;
             
             // Establecer un temporizador para cerrar y eliminar el juego después de 5 segundos
             setTimeout(function() {

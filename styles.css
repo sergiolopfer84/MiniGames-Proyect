@@ -2,58 +2,127 @@ body{
   font-family: Arial, sans-serif;
   background-color: #f0f0f0;
   text-align: center;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
+#contenedorGeneral {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+#contenedorMusica {
+  width: 30%;
+  height: auto;
+  margin-right: 10px;
+  display: inline-flex; /* Cambiado de "flex" a "inline-flex" para alinear horizontalmente */
+  align-items: center;
+}
+#volumenRange{
+  position: absolute;
+  left: 120px;
+  top:20px;
+ 
+}
+#titulo{
+  width: 50vw;
+  position: absolute;
+  left: calc(50vw - 150 px  );
+ top: 10px;
+}
+
+h2 {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 6px;
+  margin-top: 2px;
+  letter-spacing: 4px;
+  color: transparent;
+  -webkit-text-stroke: 1.3px rgb(33, 47, 69); /* Borde negro alrededor de cada letra */
+  text-shadow: 2px 2px 4px rgba(76, 188, 7, 0.8); /* Sombra verde */
+  justify-content: center;
+
+
+}
 .container {
   display: flex;
   justify-content: space-between;
-  margin: 20px;
-  margin-top: 6px;
-  
+  margin-top: 56px;
+  width: 98%;
+  height: 98%;
+  overflow: hidden;
+
 }
 
 .game {
   background-color: #fff;
-  padding: 20px;
   border: 2px solid #333;
   border-radius: 5px;
-  width: 30%;
+}
+#nivel1, #nivel2, #nivel3 {
+  background-repeat: no-repeat;
+  background-size: cover; /* Asegúrate de que la imagen se ajuste completamente dentro del contenedor sin perder su relación de aspecto */
+  background-position: center; /* Centrar la imagen dentro del contenedor */
+  width: 32vw; /* Un tercio del ancho de la vista */
+  height: 90vh; /* Altura automática para mantener la relación de aspecto de la imagen */
+  aspect-ratio: auto 1 / 1; /* Si la imagen es cuadrada, ajustar este valor a la relación de aspecto de la imagen */
+}
+#nivel1 {
+  background-image: url('/img/imagenJuego1.png');
+}
+#nivel2 {
+  background-image: url('/img/imagenJuego2.png');
+}
+#nivel3 {
+  background-image: url('/img/imagenJuego3.png');
+  
 }
 
-h2 {
-  margin: 0;
-  font-size: 20px;
-  color: #333;
-}
 
 .play-button {
   background-color: #4caf50;
   color: white;
-  border: none;
   padding: 10px 20px;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 30px;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 60%;
+  border: 2px solid black;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.8);
+  font-family: 'Press Start 2P', cursive;
+  
+
+}
+.play-button:hover {
+  background-color: rgb(231, 206, 13);
+  color: rgb(16, 15, 15);
+  font-weight: bolder;
+  box-shadow: 5px 5px 10px rgb(233, 232, 232);
 }
 
 .play-button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+  color: rgb(134, 132, 132);
 }
 #jugarNivel1, #jugarNivel2, #jugarNivel3{
   position: relative;
   width: 99vw;
   height: 90vh;
-  border: 2px solid red;
+  border: 2px solid rgb(12, 12, 12);
   border-radius: 5px;
-  background-image: url(/img/cielo_fondo.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-#jugarNivel3 {
+#jugarNivel1, #jugarNivel2, #jugarNivel3 {
   display: flex;
   justify-content: space-around;
   background-image:url('/img/Fondo.png');
@@ -61,7 +130,7 @@ h2 {
   background-size: cover;
 }
   
-  #botonResultado,#resultadoInput, #resultadoInput3, .operacion, #resultadoInput2 {
+#botonResultado,#resultadoInput, #resultadoInput3, .operacion, #resultadoInput2 {
   position: absolute;
   font-weight: 600;
   font-size: 20px;
@@ -69,6 +138,17 @@ h2 {
   background-color: #4caf50;
   border: 5px solid #215822;
   cursor: pointer; 
+}
+#botonResultado2{
+  position: absolute;
+  font-weight: 600;
+  font-size: 20px;
+  border-radius: 5px;
+  background-color: #4caf50;
+  border: 5px solid #215822;
+  cursor: pointer;
+  margin-left:70px;
+ 
 }
 #resultadoInput3, #resultadoInput, #resultadoInput2 {
   left: calc(46vw + 30px );
@@ -149,6 +229,17 @@ h2 {
 .ayuda3 {
   position: absolute;
   margin-left: 200px;
+  top: 20px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  animation-name: zoomAnimation; /* Nombre de tu animación */
+  animation-duration: 3s; /* Duración de la animación, por ejemplo, 1 segundo */
+  animation-fill-mode: forwards; /* Mantiene el estado final después de completar la animación */
+}
+.ayuda2 {
+  position: absolute;
+  margin-left: 100px;
   top: 20px;
   background-position: center;
   background-repeat: no-repeat;
@@ -238,7 +329,6 @@ h2 {
   background-repeat: no-repeat;
   background-size: contain;
   position: absolute;
- 
   
 }
 .globoSeleccionado{
@@ -287,7 +377,6 @@ position: absolute;
   position: relative;
   height: 90vh;
   width: 100%;
-  background-image: url('img/fondo2.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
@@ -299,14 +388,14 @@ position: absolute;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
   
 }
-
 #randomNumbers, #sortedNumbers, #orderedNumbers {
   display: flex;
   justify-content: center;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   color: aliceblue;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-  font-size: 22px;
+  font-size: 29px;
+  padding-top: 20px;
 }
 
 .number-container {
@@ -316,8 +405,8 @@ position: absolute;
 }
 
 .number-container img {
-  width: 120px;
-  height: 80px;
+  width: 200px;
+  height: 133px;
   image-rendering: pixelated;
   border-radius: 5px;
   transition: transform 0.3s ease-in-out;
@@ -346,7 +435,10 @@ position: absolute;
 }
 
 .orderedNumber-container {
+  height: 50px;
+  width: 50px;
   display: inline-block;
+  font-size: 40px;
   align-items: center;
   margin: 0 5px;
   padding: 5px;

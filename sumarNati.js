@@ -62,7 +62,7 @@ function crearGlobos(resultadoInput, divJugarNivel, operacion) {
     arrayGlobos.forEach(globo => {
         moverGlobo(globo, container);
 
-        //!Aki la lógica de las sumas, restas y de parar el movimiento
+        //!Aqui la lógica de las sumas, restas y de parar el movimiento
         globo.addEventListener("click", () => {
             // Agregar el globo seleccionado al array
             if (globosSeleccionados.length === 0){
@@ -156,19 +156,18 @@ function crearGlobos(resultadoInput, divJugarNivel, operacion) {
             }
 
             if (score === 5) {
-                window.nivel1Completado = true;
-                
-                jugarNivelFuncion(1);
-
-                // Ocultar el contenedor del nivel actual
-                container.style.display = 'none';
-
-                // Mostrar la pantalla inicial (el contenedor)
-                document.querySelector('.container').style.display = 'block';
-            }
-
-
-
+                        const gameContainer1 = document.getElementById('jugarNivel1');
+                        gameContainer1.innerHTML = `<img src="/img/SUCCESS1.png" alt="Imagen de éxito" style="width: 100%; height: 100%; object-fit: cover;">`;
+                        // Establecer un temporizador para cerrar y eliminar el juego después de 5 segundos
+                        setTimeout(function() {
+                            gameContainer1.style.display = 'none'; // Oculta el contenedor del juego
+                           // window.location.href = 'index.html';
+                            window.nivel1Completado = true;
+                            jugarNivelFuncion(1);
+                        }, 5000); // 5000 milisegundos = 5 segundos
+                       
+                    }
+                  
         })
 
     });
