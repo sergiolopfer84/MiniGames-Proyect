@@ -113,7 +113,7 @@ h2 {
 }
 #jugarNivel1, #jugarNivel2, #jugarNivel3{
   position: relative;
-  width: 99vw;
+  width: 97vw;
   height: 90vh;
   border: 2px solid rgb(12, 12, 12);
   border-radius: 5px;
@@ -124,7 +124,12 @@ h2 {
   justify-content: space-around;
   background-image:url('/img/Fondo.png');
   background-repeat: no-repeat;
-  background-size: cover;
+ 
+}
+#jugarNivel2 {
+  overflow: hidden;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  
 }
   
 #botonResultado1,#botonResultado2 ,#botonResultado3, #resultadoInput,
@@ -139,18 +144,14 @@ h2 {
   cursor: pointer; 
 }
 #botonResultado1,#botonResultado2 ,#botonResultado3{
-  position: relative;
-  margin-left:70px;
-  margin-left: auto;
+   margin-left: auto;
   margin-right: auto;
   margin: 10px;
   width: 100px;
   height: 40px;   
-  top: 430px; 
+ top: 55%;
   }
-  #botonResultado2 {
-    top: 100px;
-  }
+ 
 
 #resultadoInput, .operacion{
   position: relative;
@@ -353,7 +354,7 @@ h2 {
 }
 .globoSeleccionado{
   width: 150px;
-  height: 290px;
+  height: 260px;
   font-size: 80px;
   font-weight: bolder;
   line-height: 150px;
@@ -393,21 +394,7 @@ position: absolute;
   scale: 1.2;
   cursor: pointer;
  }
-#jugarNivel2 {
-  position: relative;
-  height: 90vh;
-  width: 99vw;
-  background-repeat: no-repeat;
-  background-size: cover;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border-radius: 5%;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-  
-}
+
 #randomNumbers, #sortedNumbers, #orderedNumbers {
   display: flex;
   justify-content: center;
@@ -422,13 +409,13 @@ position: absolute;
   position: absolute;
   margin: 5px;
   cursor: pointer;
-  width: 200px;
-  height: 133px;
+  width: 150px;
+  height: 100px;
 }
 
 .number-container img {
-  width: 180px;
-  height: 120px;
+  width: 150px;
+  height: 100px;
   image-rendering: pixelated;
   border-radius: 5px;
   transition: transform 0.3s ease-in-out;

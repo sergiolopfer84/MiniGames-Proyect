@@ -86,14 +86,16 @@ function startGame(resultadoInput2, divJugarNivel) {
 function displayNumbers(container, numbers, divJugarNivel) {
   let containerElement = container;
   containerElement.innerHTML = "";
-  
+   // Obtén el ancho y alto del contenedor
+   let containerWidth = divJugarNivel.offsetWidth;
+   let containerHeight = divJugarNivel.offsetHeight;
 
   numbers.forEach((number, index) => {
     let numberContainer = document.createElement('div');
     numberContainer.classList.add('number-container');
      // Utiliza porcentajes para las posiciones
-    numberContainer.style.top = Math.floor(Math.random() * 70) + '%';
-    numberContainer.style.left = (index * 10) + '%';
+     numberContainer.style.top = Math.floor(Math.random() * (containerHeight - 100)) + 'px';
+     numberContainer.style.left = Math.floor(Math.random() * (containerWidth - 100)) + 'px';
     
     let img = numberImages[number].cloneNode(true);
     img.setAttribute('data-number', number);

@@ -257,24 +257,22 @@ function crearNuevaPantalla(number) {
                 }
             });
 
-            if (isNaN(resultadoInput2.value)) {
-                alert("El valor introducido no es un número válido.");
-            } else {
-                // Operativa al pulsar el botón
-
-                botonResultado2.addEventListener("click", function () {
+            botonResultado2.addEventListener("click", function () {
+                // Verificamos si el valor ingresado es un número válido
+                const valorInput2 = parseInt(resultadoInput2.value);
+                if (isNaN(valorInput2)) {
+                    alert("Por favor, ingresa un número válido en el campo.");
+                } else {
                     // Eliminamos el input y el botón de la pantalla
                     divJugarNivel.innerHTML = "";
                     divJugarNivel.style.backgroundImage = "url('/img/fondo2.jpg')";
                     const container = document.querySelector(".container");
-                    divJugarNivel.style.width = container.offsetWidth + "px";
-                    divJugarNivel.style.height = container.offsetHeight + "px";
-
+                              
                     // Iniciamos el juego pasando por parámetro el valor que queremos 
                     // como resultado y el input donde se realiza la operativa del juego
                     startGame(resultadoInput2, divJugarNivel);
-                });
-            }
+                }
+            });
 
             break;
 
