@@ -86,17 +86,33 @@ function startGame(resultadoInput2, divJugarNivel) {
 function displayNumbers(container, numbers, divJugarNivel) {
   let containerElement = container;
   containerElement.innerHTML = "";
-   // Obtén el ancho y alto del contenedor
-   let containerWidth = divJugarNivel.offsetWidth;
-   let containerHeight = divJugarNivel.offsetHeight;
+
+  // Función para obtener una posición aleatoria dentro del contenedor
+  function getRandomPosition() {
+    let containerWidth = divJugarNivel.offsetWidth;
+    let containerHeight = divJugarNivel.offsetHeight;
+
+    // Ajustar el rango para evitar que los elementos se corten en los bordes
+    let minX = 70;
+    let minY = 70;
+    let maxX = containerWidth - 120;
+    let maxY = containerHeight - 120;
+
+    let randomX = Math.floor(Math.random() * (maxX - minX) + minX);
+    let randomY = Math.floor(Math.random() * (maxY - minY) + minY);
+
+    return { x: randomX, y: randomY };
+  }
 
   numbers.forEach((number, index) => {
     let numberContainer = document.createElement('div');
     numberContainer.classList.add('number-container');
-     // Utiliza porcentajes para las posiciones
-     numberContainer.style.top = Math.floor(Math.random() * (containerHeight - 100)) + 'px';
-     numberContainer.style.left = Math.floor(Math.random() * (containerWidth - 100)) + 'px';
-    
+
+    // Utiliza píxeles para las posiciones
+    let randomPosition = getRandomPosition();
+    numberContainer.style.top = randomPosition.y + 'px';
+    numberContainer.style.left = randomPosition.x + 'px';
+
     let img = numberImages[number].cloneNode(true);
     img.setAttribute('data-number', number);
 
@@ -105,12 +121,10 @@ function displayNumbers(container, numbers, divJugarNivel) {
     span.setAttribute('data-number', number);
     span.style.position = 'absolute';
     span.style.bottom = '0';
-    
 
     numberContainer.appendChild(img);
     numberContainer.appendChild(span);
     container.appendChild(numberContainer);
-    
 
     img.addEventListener('click', function (event) {
       let clickedNumber = parseInt(event.target.getAttribute('data-number'), 10);
@@ -119,12 +133,27 @@ function displayNumbers(container, numbers, divJugarNivel) {
         numbers = numbers.filter(num => num !== clickedNumber);
         displayNumbers(random, randomNumbers, divJugarNivel);
         displayNumbers(sorted, sortedNumbers, divJugarNivel);
-        console.log(randomNumbers);
-
-      } 
-      
+      }
     });
   });
+
+  // Listener para el evento de redimensionamiento
+  function handleResize() {
+    numbers.forEach((number, index) => {
+      let numberContainer = containerElement.children[index];
+
+      if (numberContainer) {
+        let randomPosition = getRandomPosition();
+        numberContainer.style.top = randomPosition.y + 'px';
+        numberContainer.style.left = randomPosition.x + 'px';
+      }
+    });
+  }
+
+  // Agregar el listener y manejar el redimensionamiento actual
+  window.addEventListener('resize', handleResize);
+  handleResize();
+
   divJugarNivel.appendChild(container);
 }
 
