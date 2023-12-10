@@ -159,10 +159,7 @@ h2 {
   text-align: center;
 }
 
-.operacion{
 
- /* left: calc(48vw + 120px);*/
-}
 .divOperacion{
   display: flex;
   justify-content: space-between;
