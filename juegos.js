@@ -62,7 +62,7 @@ let nivel1Activo = false;
 
 document.addEventListener('DOMContentLoaded', function () {
     // Iniciamos con los niveles sin completar y la puntuación a cero.
-  
+
     // Llamamos a los botones
     const playButton1 = document.getElementById("play-button1");
     const playButton2 = document.getElementById("play-button2");
@@ -97,8 +97,7 @@ function crearNuevaPantalla(number) {
     divJugarNivel.id = `jugarNivel${number}`;
     divJugarNivel.className = "jugarNivel";
 
-    const botonResultado = document.createElement('button');
-    botonResultado.id = "botonResultado";
+    const botonResultado = document.createElement('button');    
     botonResultado.textContent = "Jugar";
 
     // Según el número pasado por parámetro creamos la operativa
@@ -111,14 +110,20 @@ function crearNuevaPantalla(number) {
             resultadoInput1.max = 999;
             resultadoInput1.placeholder = "1-999";
             resultadoInput1.id = "resultadoInput";
-            // Comprobamos si el valor introducido es un número válido
+            // Creamos el contenedor de ayuda
             const ayuda1 = document.createElement("div");
             ayuda1.className = "ayuda1";
             ayuda1.style.backgroundImage = "url('/img/profesor.png')";
             ayuda1.style.width = "250px";
             ayuda1.style.height = "250px";
-
+            const ayuda1Titulo = document.createElement("div");
+            ayuda1Titulo.className = "ayuda1Titulo";
+            ayuda1Titulo.style.height = "50px";
+            ayuda1Titulo.innerText = "Sumas y restas."
             //Se crea el selector para las operaciones 
+            const divOperacion= document.createElement("div");
+            divOperacion.className= "divOperacion";
+            divOperacion.id = "divOperacion";
             const operacion = document.createElement("select");
             operacion.className = "operacion";
             operacion.id = "operacion";
@@ -135,37 +140,30 @@ function crearNuevaPantalla(number) {
 
             operacion.appendChild(option1);
             operacion.appendChild(option2);
-
-            divJugarNivel.appendChild(operacion);
+            divOperacion.appendChild(resultadoInput1);
+            divOperacion.appendChild(operacion);
+            divJugarNivel.appendChild(divOperacion);
+            divJugarNivel.appendChild(ayuda1Titulo);
             divJugarNivel.appendChild(ayuda1);
-            divJugarNivel.appendChild(resultadoInput1);
+            botonResultado.id = "botonResultado1";
             divJugarNivel.appendChild(botonResultado);
             const mensajeEmergente1 = document.createElement('div');
             mensajeEmergente1.id = 'mensajeEmergente1';
-            mensajeEmergente1.style.padding = '5px';
+            mensajeEmergente1.style.padding = '15px';
             mensajeEmergente1.textContent = 'Selecciona un resultado y pulsa jugar para realizar la suma o resta según corresponda. Pincha un globo y luego su pareja, si aciertas explotarán, ¡Mucha Suerte!';
-            mensajeEmergente1.style.position = 'absolute';
-            mensajeEmergente1.style.marginTop = '50px';
-            mensajeEmergente1.style.display = 'none';
-            mensajeEmergente1.style.zIndex = '1000';
-            mensajeEmergente1.style.backgroundColor = 'black';
-            mensajeEmergente1.style.color = 'white';
-            mensajeEmergente1.style.borderRadius = '50px';
+          
             document.body.appendChild(mensajeEmergente1);
             ayuda1.addEventListener('click', function () {
-                mensajeEmergente1.style.left = '55%';
-                mensajeEmergente1.style.top = '30%';
                 mensajeEmergente1.style.transform = 'translate(-50%, -50%)';
                 mensajeEmergente1.style.display = 'block';
             });
-    
+
             // Opcional: escuchar clics fuera del mensaje para cerrarlo
             document.addEventListener('click', function (event) {
                 if (event.target !== ayuda1 && event.target !== mensajeEmergente1) {
                     mensajeEmergente1.style.display = 'none';
                 }
             })
-
 
 
             resultadoInput1.addEventListener("input", function () {
@@ -179,38 +177,38 @@ function crearNuevaPantalla(number) {
                 }
             });
 
-            
-                // Operativa al pulsar el botón
-                botonResultado.addEventListener("click", function () {
-                    // Convertimos el valor del input a un número
-                    const valorInput = parseInt(resultadoInput1.value);
-                
-                    // Verificamos si el valor del input es un número válido
-                    if (isNaN(valorInput)) {
-                        // Mostrar un mensaje de error si el valor no es un número
-                        alert("El valor introducido no es un número válido.");
-                    } else {
-                        // Continuar con la lógica del juego si el valor es un número válido
-                
-                        // Limpiar el divJugarNivel y establecer el fondo
-                        divJugarNivel.innerHTML = "";
-                        divJugarNivel.style.backgroundImage = "url('/img/cielo_fondo.png')";
-                
-                        // Obtener el valor de la operación seleccionada
-                        const valorOperacion = operacion.value;
-                
-                        // Iniciar el juego
-                        crearGlobos(resultadoInput1, divJugarNivel, valorOperacion);
-                    }
-                });
-            
+
+            // Operativa al pulsar el botón
+            botonResultado.addEventListener("click", function () {
+                // Convertimos el valor del input a un número
+                const valorInput = parseInt(resultadoInput1.value);
+
+                // Verificamos si el valor del input es un número válido
+                if (isNaN(valorInput)) {
+                    // Mostrar un mensaje de error si el valor no es un número
+                    alert("El valor introducido no es un número válido.");
+                } else {
+                    // Continuar con la lógica del juego si el valor es un número válido
+
+                    // Limpiar el divJugarNivel y establecer el fondo
+                    divJugarNivel.innerHTML = "";
+                    divJugarNivel.style.backgroundImage = "url('/img/cielo_fondo.png')";
+
+                    // Obtener el valor de la operación seleccionada
+                    const valorOperacion = operacion.value;
+
+                    // Iniciar el juego
+                    crearGlobos(resultadoInput1, divJugarNivel, valorOperacion);
+                }
+            });
+
             break;
 
         case 2:
-            
+
             // Input para introducir los datos y botón para iniciar el jueg
             const resultadoInput2 = document.createElement("input");
-        
+           
             resultadoInput2.type = "number";
             resultadoInput2.min = 10;
             resultadoInput2.max = 100;
@@ -219,28 +217,23 @@ function crearNuevaPantalla(number) {
             // Comprobamos si el valor introducido es un número válido
             const ayuda2 = document.createElement("div");
             ayuda2.className = "ayuda2";
+            const ayuda2Titulo = document.createElement("div");
+            ayuda2Titulo.className = "ayuda2Titulo";
+            ayuda2Titulo.style.height = "50px";
+            ayuda2Titulo.innerText = "Ordena de mayor a menor."
             ayuda2.style.backgroundImage = "url('/img/profesora.png')";
             ayuda2.style.width = "250px";
             ayuda2.style.height = "250px";
             divJugarNivel.appendChild(ayuda2);
+            divJugarNivel.appendChild(ayuda2Titulo);
             const mensajeEmergente2 = document.createElement('div');
             mensajeEmergente2.id = 'mensajeEmergente2';
             mensajeEmergente2.textContent = 'Hola, este juego te ayudará a distinguir que números son mayores y menores. Selecciona de mayor a menor los pececitos hasta ordenarlos todos, ¡mucha suerte!';
-            mensajeEmergente2.style.position = 'absolute';
-            mensajeEmergente2.style.marginTop = '50px';
-            mensajeEmergente2.style.display = 'none';
-            mensajeEmergente2.style.zIndex = '1000';
-            mensajeEmergente2.style.backgroundColor = 'black'; // Asegúrate de que esté por encima de otros elementos
-            mensajeEmergente2.style.color = 'white';
-            mensajeEmergente2.style.borderRadius = '50px';
-            // Agregar más estilos para centrarlo en pantalla, darle color, etc.
-
+        
             // Agregar el mensaje emergente al cuerpo del documento o al contenedor relevante
             document.body.appendChild(mensajeEmergente2);
             ayuda2.addEventListener('click', function () {
                 // Posicionar el mensaje emergente y mostrarlo
-                mensajeEmergente2.style.left = '55%';
-                mensajeEmergente2.style.top = '28%';
                 mensajeEmergente2.style.transform = 'translate(-50%, -50%)';
                 mensajeEmergente2.style.display = 'block';
             });
@@ -258,15 +251,15 @@ function crearNuevaPantalla(number) {
             divJugarNivel.appendChild(resultadoInput2);
             divJugarNivel.appendChild(botonResultado2);
             resultadoInput2.style.margin = "auto";
-            
-            
+
+
             resultadoInput2.addEventListener("input", function () {
                 const maxValue = 100;
                 const minValue = 10;
                 if (parseInt(resultadoInput2.value) > maxValue) {
                     resultadoInput2.value = maxValue; // Si es mayor a 100, ajustamos el valor
                 }
-                if(parseInt(resultadoInput2.value) < minValue){
+                if (parseInt(resultadoInput2.value) < minValue) {
                     resultadoInput2.value = minValue;
                 }
             });
@@ -275,21 +268,21 @@ function crearNuevaPantalla(number) {
                 alert("El valor introducido no es un número válido.");
             } else {
                 // Operativa al pulsar el botón
-                
+
                 botonResultado2.addEventListener("click", function () {
                     // Eliminamos el input y el botón de la pantalla
                     divJugarNivel.innerHTML = "";
                     divJugarNivel.style.backgroundImage = "url('/img/fondo2.jpg')";
                     const container = document.querySelector(".container");
-                        divJugarNivel.style.width = container.offsetWidth + "px";
-                        divJugarNivel.style.height = container.offsetHeight + "px";
-                        
+                    divJugarNivel.style.width = container.offsetWidth + "px";
+                    divJugarNivel.style.height = container.offsetHeight + "px";
+
                     // Iniciamos el juego pasando por parámetro el valor que queremos 
                     // como resultado y el input donde se realiza la operativa del juego
                     startGame(resultadoInput2, divJugarNivel);
                 });
             }
-           
+
             break;
 
         case 3:
@@ -302,29 +295,25 @@ function crearNuevaPantalla(number) {
             ayuda.style.backgroundImage = "url('/img/profesora.png')";
             ayuda.style.width = "250px";
             ayuda.style.height = "250px";
+            const ayuda3Titulo = document.createElement("div");
+            ayuda3Titulo.className = "ayuda3Titulo";
+            ayuda3Titulo.style.height = "50px";
+            ayuda3Titulo.innerText = "Aprendemos a multiplicar."
             divJugarNivel.appendChild(resultadoInput3);
             divJugarNivel.appendChild(ayuda); // Añade la capa ayuda3 al divJugarNivel
+            divJugarNivel.appendChild(ayuda3Titulo);
+            botonResultado.id = "botonResultado3";
             divJugarNivel.appendChild(botonResultado);
             const mensajeEmergente = document.createElement('div');
-            mensajeEmergente.id = 'mensajeEmergente';
+            mensajeEmergente.id = 'mensajeEmergente3';
             mensajeEmergente.textContent = 'Hola, este juego te ayudará a practicar las tablas de multiplicar. Arrastra las llaves al candado con la solución correspondiente para abrirlos todos, si el candado se pone triste podrás seguir intentándolo. ¡Mucha suerte y que te diviertas!';
-            mensajeEmergente.style.position = 'absolute';
-            mensajeEmergente.style.marginTop = '50px';
-            mensajeEmergente.style.display = 'none';
-            mensajeEmergente.style.zIndex = '1000';
-            mensajeEmergente.style.backgroundColor = 'black'; // Asegúrate de que esté por encima de otros elementos
-            mensajeEmergente.style.color = 'white';
-            mensajeEmergente.style.borderRadius = '50px';
-            // Agregar más estilos para centrarlo en pantalla, darle color, etc.
-
+          
             // Agregar el mensaje emergente al cuerpo del documento o al contenedor relevante
             document.body.appendChild(mensajeEmergente);
 
             // Agregar el evento al hacer clic en ayuda3
             ayuda.addEventListener('click', function () {
                 // Posicionar el mensaje emergente y mostrarlo
-                mensajeEmergente.style.left = '55%';
-                mensajeEmergente.style.top = '28%';
                 mensajeEmergente.style.transform = 'translate(-50%, -50%)';
                 mensajeEmergente.style.display = 'block';
             });
