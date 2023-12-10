@@ -2,7 +2,7 @@ export { crearGlobos, moverGlobo };
 import { jugarNivelFuncion } from "./juegos.js";
 
 let globosSeleccionados = [];
-let score = 0;
+let score;
 
 document.addEventListener('DOMContentLoaded', (event) => {
     var musica = document.getElementById("musicaJuegos");
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 // Función para crear las globos
 function crearGlobos(resultadoInput, divJugarNivel, operacion) {
-
+    score = 0;
     const scoreDiv = document.createElement("div");
     scoreDiv.id = "scoreDiv";
     scoreDiv.innerText = `Puntuación: ${score}`;

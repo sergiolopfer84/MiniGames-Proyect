@@ -27,25 +27,21 @@ function jugarNivelFuncion(nivel) {
 
             // Muestra la pantalla inicial
             document.getElementById('container').style.display = 'block';
-            const nivel1 = document.getElementById("nivel1");
-            nivel1.style.display = "inline-block";
-            const nivel2 = document.getElementById("nivel2");
-            nivel2.style.display = "inline-block";
-            const nivel3 = document.getElementById("nivel3");
-            nivel3.style.display = "inline-block";
+            for (let i = 1; i <= 3; i++) {
+                const nivel = document.getElementById(`nivel${i}`);
+                nivel.style.display = "inline-block";
+            }
+            
 
         } else if (nivel === 2) {
             console.log(`jugarNivelFuncion llamada para Nivel ${nivel}`);
             document.getElementById('nivel3').querySelector('.play-button').removeAttribute('disabled');
             nivel2Completado = true;
             document.getElementById('container').style.display = 'block';
-            const nivel1 = document.getElementById("nivel1");
-            nivel1.style.display = "inline-block";
-            const nivel2 = document.getElementById("nivel2");
-            nivel2.style.display = "inline-block";
-            const nivel3 = document.getElementById("nivel3");
-            nivel3.style.display = "inline-block";
-
+            for (let i = 1; i <= 3; i++) {
+                const nivel = document.getElementById(`nivel${i}`);
+                nivel.style.display = "inline-block";
+            }
         }
     } else {
         console.log(`jugarNivelFuncion llamada para Nivel ${nivel}`);
@@ -85,13 +81,10 @@ document.addEventListener('DOMContentLoaded', function () {
 // Para crear una nueva pantalla.
 function crearNuevaPantalla(number) {
     // Desactivamos la vista de cada nivel hasta que pasemos el anterior.
-    const nivel1 = document.getElementById("nivel1");
-    nivel1.style.display = "none";
-    const nivel2 = document.getElementById("nivel2");
-    nivel2.style.display = "none";
-    const nivel3 = document.getElementById("nivel3");
-    nivel3.style.display = "none";
-
+    for (let i = 1; i <= 3; i++) {
+        const nivel = document.getElementById(`nivel${i}`);
+        nivel.style.display = "none";
+    }
     // Creamos un nuevo div para almacenar y un botón para manejarlo
     const divJugarNivel = document.createElement('div');
     divJugarNivel.id = `jugarNivel${number}`;
