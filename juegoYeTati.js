@@ -59,8 +59,7 @@ function startGame(resultadoInput2, divJugarNivel) {
           const gameContainer2 = document.getElementById('jugarNivel2');
           gameContainer2.innerHTML = `<img src="/img/SUCCESS2.png" alt="Imagen de éxito" style="width: 100%; height: 100%; object-fit: cover;">`;
           const display2 = document.querySelector('.orderedNumbers');
-          //display2.style.display = `none`;
-          
+                   
           // Establecer un temporizador para cerrar y eliminar el juego después de 5 segundos
           setTimeout(function() {
               gameContainer2.style.display = 'none'; // Oculta el contenedor del juego
