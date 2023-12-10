@@ -71,49 +71,30 @@ function operativaCandados(resultadoInput3, divJugarNivel) {
     }
 }
 
-function generarNumeros(llave, candado, resultadoInput3, i, resultadosMezclados) {
-    let numero, numero2, resultado;
+function generarNumeros(llave, candado, numero1, numero2) {
+    const resultado = numero1 * numero2;
 
-    if (isNaN(resultadoInput3.value) || resultadoInput3.value === "") {
-        numero = i;  // Esto generará la tabla del número i
-        numero2 = 0;  // Esto asegura que la multiplicación sea siempre con 0
-        resultado = numero * numero2;
-    } else {
-        numero = i;
-        numero2 = parseInt(resultadoInput3.value, 10);
-        resultado = numero * numero2;
-    }
-
-    llave.textContent = `${numero} x ${numero2}`;
+    llave.textContent = `${numero1} x ${numero2}`;
     llave.dataset.value = resultado.toString();
 
-    candado.textContent = resultadosMezclados[i - 1];
-    candado.dataset.value = resultadosMezclados[i - 1].toString();
+    candado.textContent = resultado;
+    candado.dataset.value = resultado.toString();
 }
+
+function mezclarValores(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
 function crearCandadosLlaves(resultadoInput3, divJugarNivel) {
     const locks = document.createElement("div");
     locks.className = "locks";
     const keys = document.createElement("div");
     keys.className = "keys";
-    let resultados = [];
 
-    if (isNaN(resultadoInput3.value) || resultadoInput3.value === "") {
-        // Generar resultados como 0 para la tabla del 0
-        resultados = Array(10).fill(0);
-    } else {
-        // Calcular resultados normalmente
-        for (let i = 1; i <= 10; i++) {
-            let numero = i;
-            let numero2 = parseInt(resultadoInput3.value, 10);
-            resultados.push(numero * numero2);
-        }
-        
-        // Barajar los resultados si es necesario
-        for (let i = resultados.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [resultados[i], resultados[j]] = [resultados[j], resultados[i]];
-        }
-    }
+    const resultadosSet = new Set();
 
     for (let i = 1; i <= 10; i++) {
         const candado = document.createElement("div");
@@ -122,11 +103,34 @@ function crearCandadosLlaves(resultadoInput3, divJugarNivel) {
         llave.className = "key";
         llave.draggable = true;
 
-        generarNumeros(llave, candado, resultadoInput3, i, resultados);
-        
+        let numero2;
+
+        do {
+            if (isNaN(resultadoInput3.value) || resultadoInput3.value === "") {
+                numero2 = Math.ceil(Math.random() * 10);
+            } else {
+                numero2 = parseInt(resultadoInput3.value, 10);
+            }
+        } while (resultadosSet.has(i * numero2));
+
+        resultadosSet.add(i * numero2);
+
+        generarNumeros(llave, candado, i, numero2);
+
         locks.appendChild(candado);
         keys.appendChild(llave);
     }
+
+    // Barajar las llaves y candados después de generarlas
+    const llavesArray = Array.from(keys.children);
+    mezclarValores(llavesArray);
+    keys.innerHTML = "";
+    llavesArray.forEach(llave => keys.appendChild(llave));
+
+    const candadosArray = Array.from(locks.children);
+    mezclarValores(candadosArray);
+    locks.innerHTML = "";
+    candadosArray.forEach(candado => locks.appendChild(candado));
 
     divJugarNivel.appendChild(locks);
     divJugarNivel.appendChild(keys);
