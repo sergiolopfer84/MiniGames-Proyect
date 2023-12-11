@@ -124,6 +124,8 @@ h2 {
   justify-content: space-around;
   background-image:url('/img/Fondo.png');
   background-repeat: no-repeat;
+  min-width: 700px;
+  min-height: 500px;
  
 }
 #jugarNivel2 {
@@ -135,7 +137,7 @@ h2 {
 #botonResultado1,#botonResultado2 ,#botonResultado3, #resultadoInput,
  #resultadoInput3, .operacion, #resultadoInput2 {
   position: absolute;
-  top:45%;
+  bottom: 45%;
   font-weight: 600;
   font-size: 20px;
   border-radius: 5px;
@@ -149,15 +151,16 @@ h2 {
   margin: 10px;
   width: 100px;
   height: 40px;   
- top: 55%;
+  bottom:35%;
   }
- 
+
 
 #resultadoInput, .operacion{
   position: relative;
   margin:0  20px;
   width: 180px;
   text-align: center;
+  
 }
 
 
@@ -166,7 +169,7 @@ h2 {
   justify-content: space-between;
   align-items: center;
   position: absolute;
-  top: 360px; 
+  bottom: 45%; 
   height: 40px;
   margin-left: auto;
   margin-right: auto;

@@ -10,7 +10,8 @@ element.className = 'orderedNumbers';
 parrafo.className = 'orderedNumbers p';
 for (let i = 0; i < numTotalPeces; i++) {
   const img = new Image();
-  const imageIndex = i % numImagesToGenerate; // Usamos el operador módulo para ciclar entre las 10 imágenes
+  const imageIndex = i % numImagesToGenerate; 
+  // Usamos el operador módulo para ciclar entre las 10 imágenes
   img.src = `img/peces_${imageIndex}.png`;
   img.id = `peces_${i}`;
   numberImages.push(img);
@@ -95,8 +96,8 @@ function displayNumbers(container, numbers, divJugarNivel) {
     // Ajustar el rango para evitar que los elementos se corten en los bordes
     let minX = 70;
     let minY = 70;
-    let maxX = containerWidth - 120;
-    let maxY = containerHeight - 120;
+    let maxX = containerWidth - 200;
+    let maxY = containerHeight - 200;
 
     let randomX = Math.floor(Math.random() * (maxX - minX) + minX);
     let randomY = Math.floor(Math.random() * (maxY - minY) + minY);
